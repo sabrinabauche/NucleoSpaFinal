@@ -1,0 +1,26 @@
+#titulo {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #F8F6F2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 20px;
+}
+
+.treatments-grid {
+  width: 100%;
+  /*max-width: 1200px;*/
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 10px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+@media (max-width: 992px) {
+  .treatments-grid {
+    grid-template-columns: 1fr;
+  }
+}

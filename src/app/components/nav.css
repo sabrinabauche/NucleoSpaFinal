@@ -1,0 +1,133 @@
+/* ================= DESKTOP ================= */
+#navbar {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+}
+
+.navbar ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style: none;
+  align-items: center;
+  gap: 70px; /*espacio entre opciones menu*/
+}
+
+.navbar li {
+  position: relative;
+}
+
+.navbar a {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  font-size: 18px;
+  color: #ffffff;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.navbar a:hover,
+.navbar a:focus,
+.navbar .active,
+.navbar li:hover > a {
+  opacity: 1;
+}
+
+/* ================= MOBILE TOGGLE ================= */
+.mobile-nav-toggle {
+  color: #ffffff;
+  font-size: 28px;
+  cursor: pointer;
+  display: none;
+  line-height: 0;
+}
+
+@media (max-width: 992px) {
+  .mobile-nav-toggle {
+    display: block;
+    margin-left: auto;
+  }
+
+  #navbar {
+    justify-content: flex-end;
+  }
+
+  .navbar ul {
+    display: none;
+  }
+}
+
+/* ================= MOBILE MENU OPEN ================= */
+.navbar-mobile {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 999;
+}
+
+.navbar-mobile .mobile-nav-toggle {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+/* popup menu */
+.navbar-mobile ul {
+  position: absolute;
+  top: 60px;
+  gap: 0px;
+  right: 20px;
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px; 
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  align-items: center; /* 👈 centra los li */
+}
+
+
+.navbar-mobile a {
+  padding: 6px 12px; /*padding de cada elemento*/
+  font-size: 17px;
+  color: #000;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.navbar-mobile li {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* 👈 centra el contenido */
+}
+
+.navbar-mobile a:hover,
+.navbar-mobile a:focus,
+.navbar-mobile .active,
+.navbar-mobile li:hover > a {
+  opacity: 1;
+  color: #000000;
+}
+
+/* appointment button */
+.navbar-mobile .mobile-version {
+  font-size: 12px;
+  width: 100%;
+  padding: 12px;
+  border: 1.57px solid #000;
+  margin-top: 5px;
+  margin-right: 15px;
+  border-radius: 2px;
+  color: #000;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.navbar-mobile .mobile-version:hover {
+  background: rgba(114, 98, 98, 0.437);
+  border-color: #000;
+  color: #000;
+}

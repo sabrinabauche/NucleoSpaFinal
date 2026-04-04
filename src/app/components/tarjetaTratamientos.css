@@ -1,0 +1,71 @@
+.treatment-card {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  border-radius: 50px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+}
+
+/* OVERLAY BASE (siempre visible abajo) */
+.treatment-card .overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 20px 20px 10px 20px;
+
+  /* 🔥 GRADIENTE en lugar de fondo sólido */
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.65) 0%,   /* oscuro abajo */
+    rgba(0, 0, 0, 0.3) 30%,   /* transición */
+    rgba(0, 0, 0, 0) 60%      /* transparente arriba */
+  );
+
+  transition: all 0.3s ease;
+}
+
+/* CONTENIDO */
+.treatment-card .content {
+  color: #F5F5F5; /* 🔥 no blanco puro → más elegante */
+}
+
+/* TITULO SIEMPRE VISIBLE */
+.treatment-card h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-family: 'Josefin Sans', serif;
+}
+
+/* DESCRIPCIÓN OCULTA POR DEFAULT */
+.treatment-card p {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+  font-family: 'Josefin Sans', serif;
+
+  opacity: 0;
+  transform: translateY(10px);
+  max-height: 0;
+  overflow: hidden;
+
+  transition: all 0.3s ease;
+}
+
+/* HOVER → MÁS OSCURO TODO */
+.treatment-card:hover .overlay {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/* HOVER → APARECE DESCRIPCIÓN */
+.treatment-card:hover p {
+  opacity: 1;
+  transform: translateY(0);
+  max-height: 200px; /* permite animación suave */
+}

@@ -1,0 +1,68 @@
+/* hero.css */
+
+#hero {
+  width: 100%;
+  height: 100vh;
+  background: url('../../../public/assets/images/hero-bg.jpg') top center;
+  background-size: cover;
+  position: relative;
+  display: flex;
+  justify-content: center; /* 👈 centra horizontal */
+  align-items: center; 
+  padding: 0;
+}
+
+#hero:before {
+  content: '';
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.hero-logo {
+  width: 400px;
+  height: auto;
+}
+
+@media (max-width: 992px) {
+  .hero-logo {
+    width: 300px;
+  }
+}
+
+
+#hero .logo {
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  align-items: center;
+ /*margin-left:100px;*/
+}
+
+@media (max-width: 992px) {
+  #hero .container {
+    padding-top: 98px;
+  }
+}
+
+#hero .btns {
+  margin-top: 30px;
+  justify-content: center;
+  display: flex;  
+  gap:15px;
+}
+
+@media (max-width: 992px) {
+  #hero .btns {
+    margin-top: 15px;
+    gap:0px;
+  }
+}
+
+@media (min-width: 1024px) {
+  #hero {
+    background-attachment: fixed;
+  }
+}

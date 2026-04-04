@@ -1,0 +1,33 @@
+.section-title {
+  padding-bottom: 40px;
+}
+
+.section-title h2 {
+  font-size: 20px;
+  font-weight: 550;
+  padding: 20px;
+  line-height: 1px;
+  margin: 0 0 5px 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: center;
+  color: #9F5D38;
+  font-family: 'Josefin Sans', serif;
+}
+
+.section-title h2::after {
+  content: '';
+  display: block;
+  width: 120px;          /* 👈 longer line */
+  height: 2px;
+  background: #9F5D38;
+  margin: 30px auto 0;   /* 👈 more space + centered */
+}
+
+.section-title p {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 500;
+  font-family: 'Josefin Sans', serif;
+  color: #371806;
+}

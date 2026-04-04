@@ -1,0 +1,30 @@
+#hero .btn-hero {
+  margin: 0 0 0 15px;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  padding: 15px 20px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  line-height: 1;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  background: transparent;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+#hero .btn-hero:hover {
+  background: rgba(255, 255, 255, 0.171);
+  color: #fff;
+}
+
+@media (max-width: 992px) {
+  #hero .btn-hero {
+    font-size: 12px;
+    padding: 10px 16px;
+  }
+}

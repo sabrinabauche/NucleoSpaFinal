@@ -1,0 +1,19 @@
+
+.logo-svg {
+  flex: 0 0 auto;
+  line-height: 1;
+  font-weight: 300;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.logo-svg text {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+.logo-svg {
+  color: #fff; /* afecta currentColor del SVG */
+}
