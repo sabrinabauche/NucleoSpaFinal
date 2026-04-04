@@ -1,11 +1,73 @@
-import React from "react";
+'use client';
+import React, { useState } from "react"; // 👈 agregamos useState
 import "./tratamientos.css";
 import SectionTitle from "../components/SectionTitle";
 import TreatmentCard from "../components/TarjetaTratamientos";
 
 export default function Tratamientos() {
+
+  const [showAll, setShowAll] = useState(false);
+  // 👆 controla si mostramos todos o solo 4
+
+  const treatments = [
+    {
+      image: "/assets/images/limpieza.jpg",
+      title: "Limpieza Profunda",
+      description: "Purifica tu piel a profundidad, eliminando impurezas y devolviéndole frescura y luminosidad."
+    },
+    {
+      image: "/assets/images/limpieza.jpg",
+      title: "Hidratación Intensiva",
+      description: "Recupera la humedad esencial de tu piel y mejora su textura desde la primera sesión."
+    },
+    {
+      image: "/assets/images/limpieza.jpg",
+      title: "Anti-Acne",
+      description: "Purifica y equilibra tu piel, ayudando a prevenir brotes y a recuperar su claridad natural."
+    },
+    {
+      image: "/assets/images/limpieza.jpg",
+      title: "Anti-Aging",
+      description: "Ayuda a reducir líneas de expresión y mejora la firmeza para una piel más suave y luminosa."
+    },
+    {
+      image: "/assets/images/limpieza.jpg",
+      title: "Lifting facial",
+      description: "Restaura la arquitectura facial y redefine la firmeza de tu piel."
+    },
+    {
+      image: "/assets/images/limpieza.jpg",
+      title: "Luminous Glow",
+      description: "Restaura la arquitectura facial y redefine la firmeza de tu piel."
+    },
+    {
+      image: "/assets/images/limpieza.jpg",
+      title: "Piel sensible",
+      description: "Reconstruye el escudo natural de tu rostro con nuestro protocolo de reparación celular."
+    },
+    {
+      image: "/assets/images/limpieza.jpg",
+      title: "Exfoliante enzimático",
+      description: "Exfolia suavemente, mejora la textura y ayuda a unificar el tono para una piel más lisa y luminosa."
+    },
+    {
+      image: "/assets/images/limpieza.jpg",
+      title: "Microneedling",
+      description: "Exfolia suavemente, mejora la textura y ayuda a unificar el tono para una piel más lisa y luminosa."
+    },
+    {
+      image: "/assets/images/limpieza.jpg",
+      title: "Oxigenoterapia",
+      description: "Mejora la oxigenación y la hidratación de la piel, ayudando a que se vea más fresca y saludable."
+    }
+  ];
+
+  // 👇 lógica: si no showAll → solo 4
+  const visibleTreatments = showAll ? treatments : treatments.slice(0, 4);
+
   return (
     <section id="titulo">
+
       <div className="texto">
         <SectionTitle
           title="Tratamientos"
@@ -13,58 +75,24 @@ export default function Tratamientos() {
         />
       </div>
 
-      <div className="treatments-grid">
-        <TreatmentCard
-          image="/assets/images/limpieza.jpg"
-          title="Limpieza Profunda"
-          description="Purifica tu piel a profundidad, eliminando impurezas y devolviéndole frescura y luminosidad."
-        />
-        <TreatmentCard
-          image="/assets/images/limpieza.jpg"
-          title="Hidratación Intensiva"
-          description="Recupera la humedad esencial de tu piel y mejora su textura desde la primera sesión."
-        />
-        <TreatmentCard
-          image="/assets/images/limpieza.jpg"
-          title="Anti-Acne"
-          description="Purifica y equilibra tu piel, ayudando a prevenir brotes y a recuperar su claridad natural."
-        />
-        <TreatmentCard
-          image="/assets/images/limpieza.jpg"
-          title="Anti-Aging"
-          description="Ayuda a reducir líneas de expresión y mejora la firmeza para una piel más suave y luminosa."
-        />
-        <TreatmentCard
-          image="/assets/images/limpieza.jpg"
-          title="Lifting facial"
-          description="Restaura la arquitectura facial y redefine la firmeza de tu piel."
-        />
-        <TreatmentCard
-          image="/assets/images/limpieza.jpg"
-          title="Luminous Glow"
-          description="Ayuda a recuperar el brillo natural de la piel mientras mejora su apariencia y uniformidad."
-        />
-        <TreatmentCard
-          image="/assets/images/limpieza.jpg"
-          title="Piel sensible"
-          description="Reconstruye el escudo natural de tu rostro con nuestro protocolo de reparación celular."
-        />
-        <TreatmentCard
-          image="/assets/images/limpieza.jpg"
-          title="Exfoliante enzimático"
-          description="Exfolia suavemente, mejora la textura y ayuda a unificar el tono para una piel más lisa y luminosa."
-        />
-        <TreatmentCard
-          image="/assets/images/limpieza.jpg"
-          title="Microneedling"
-          description="Estimula la producción de colágeno, mejora la textura y ayuda a reducir marcas e imperfecciones."
-        />
-        <TreatmentCard
-          image="/assets/images/limpieza.jpg"
-          title="Oxigenoterapia"
-          description="Mejora la oxigenación y la hidratación de la piel, ayudando a que se vea más fresca y saludable."
-        />
+      <div className={`treatments-grid ${showAll ? "expanded" : "collapsed"}`}>
+        {visibleTreatments.map((t, index) => (
+          <TreatmentCard
+            key={index}
+            image={t.image}
+            title={t.title}
+            description={t.description}
+          />
+        ))}
       </div>
+
+      {/* 👇 BOTÓN VER MÁS */}
+      <div className="ver-mas-container">
+        <button onClick={() => setShowAll(!showAll)} className="ver-mas-btn">
+          {showAll ? "Ver menos" : "Ver más"}
+        </button>
+      </div>
+
     </section>
   );
 }

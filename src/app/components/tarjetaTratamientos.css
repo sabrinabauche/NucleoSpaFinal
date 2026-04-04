@@ -37,7 +37,7 @@
 /* TITULO SIEMPRE VISIBLE */
 .treatment-card h3 {
   margin: 0;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   text-transform: uppercase;
   font-family: 'Josefin Sans', serif;
@@ -68,4 +68,19 @@
   opacity: 1;
   transform: translateY(0);
   max-height: 200px; /* permite animación suave */
+}
+
+.treatments-grid {
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+/* cerrado (solo 1 fila) */
+.treatments-grid.collapsed {
+  max-height: 400px;
+}
+
+/* abierto */
+.treatments-grid.expanded {
+  max-height: 2000px;
 }
