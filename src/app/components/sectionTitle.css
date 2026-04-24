@@ -2,8 +2,14 @@
   padding-bottom: 40px;
 }
 
+@media (max-width: 992px) {
+  .section-title {
+    padding-bottom: 20px;
+  }
+}
+
 .section-title h2 {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 550;
   padding: 20px;
   line-height: 1px;
@@ -11,23 +17,50 @@
   letter-spacing: 2px;
   text-transform: uppercase;
   text-align: center;
-  color: #9F5D38;
+  color: #c3b296;
   font-family: 'Josefin Sans', serif;
 }
+
+
 
 .section-title h2::after {
   content: '';
   display: block;
   width: 120px;          /* 👈 longer line */
   height: 2px;
-  background: #9F5D38;
+  background: #c3b296;
   margin: 30px auto 0;   /* 👈 more space + centered */
 }
 
 .section-title p {
   margin: 0;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
+  text-align: center;
   font-family: 'Josefin Sans', serif;
-  color: #371806;
+  color: #c3b296;
+}
+
+@media (max-width: 992px) {
+  .section-title h2 {
+    font-size:17px;
+  }
+}
+
+@media (max-width: 992px) {
+  .section-title p {
+    font-size:17px;
+  }
+}
+
+@media (max-width: 550px) {
+  .section-title h2 {
+    font-size:16px;
+  }
+}
+
+@media (max-width: 550px) {
+  .section-title p {
+    font-size:15px;
+  }
 }

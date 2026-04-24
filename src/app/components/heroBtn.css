@@ -1,5 +1,5 @@
 #hero .btn-hero {
-  margin: 0 0 0 15px;
+  margin: 0 0 0 0px;
   font-weight: 500;
   font-size: 15px;
   letter-spacing: 1px;
@@ -26,5 +26,12 @@
   #hero .btn-hero {
     font-size: 12px;
     padding: 10px 16px;
+  }
+}
+
+@media (max-width: 580px) {
+  #hero .btn-hero {
+    font-size: 11px;
+    padding: 10px 10px;
   }
 }

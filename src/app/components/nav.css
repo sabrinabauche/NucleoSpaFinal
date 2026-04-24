@@ -22,6 +22,7 @@
   display: flex;
   align-items: center;
   padding: 10px 0;
+  /*tamaño elementos del menu*/
   font-size: 18px;
   color: #ffffff;
   opacity: 0.5;
@@ -38,6 +39,7 @@
 /* ================= MOBILE TOGGLE ================= */
 .mobile-nav-toggle {
   color: #ffffff;
+  /*tamaño del elemento de menu*/
   font-size: 28px;
   cursor: pointer;
   display: none;
@@ -92,6 +94,7 @@
 
 .navbar-mobile a {
   padding: 6px 12px; /*padding de cada elemento*/
+  /*tamaño de elementos del menu mobile*/
   font-size: 17px;
   color: #000;
   opacity: 0.7;
