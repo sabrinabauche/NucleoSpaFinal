@@ -1,66 +1,81 @@
 .section-title {
   padding-bottom: 40px;
+  text-align: center;
 }
 
-@media (max-width: 992px) {
-  .section-title {
-    padding-bottom: 20px;
-  }
-}
-
+/* Main section heading */
 .section-title h2 {
-  font-size: 18px;
-  font-weight: 550;
-  padding: 20px;
-  line-height: 1px;
-  margin: 0 0 5px 0;
-  letter-spacing: 2px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 6px;
   text-transform: uppercase;
   text-align: center;
-  color: #c3b296;
-  font-family: 'Josefin Sans', serif;
+  color: #cdbfa8;
+  margin: 0;
+  line-height: 1.2;
+  padding: 20px 20px 0;
 }
-
-
 
 .section-title h2::after {
   content: '';
   display: block;
-  width: 120px;          /* 👈 longer line */
-  height: 2px;
-  background: #c3b296;
-  margin: 30px auto 0;   /* 👈 more space + centered */
+  width: 48px;
+  height: 1px;
+  background: #c4a87a;
+  margin: 16px auto 0;
 }
 
+/* Subtitle */
 .section-title p {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 500;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
   text-align: center;
-  font-family: 'Josefin Sans', serif;
-  color: #c3b296;
+  color: rgba(195, 178, 150, 0.65);
+  margin: 14px 20px 0;
+  letter-spacing: 1.5px;
+  line-height: 1.7;
+  text-transform: uppercase;
 }
 
+/* md */
 @media (max-width: 992px) {
+  .section-title {
+    padding-bottom: 28px;
+  }
+
   .section-title h2 {
-    font-size:17px;
+    font-size: 20px;
+    letter-spacing: 5px;
   }
-}
 
-@media (max-width: 992px) {
   .section-title p {
-    font-size:17px;
+    font-size: 14px;
   }
 }
 
-@media (max-width: 550px) {
+/* sm */
+@media (max-width: 768px) {
   .section-title h2 {
-    font-size:16px;
+    font-size: 18px;
+    letter-spacing: 4px;
+  }
+
+  .section-title p {
+    font-size: 13px;
+    letter-spacing: 1px;
   }
 }
 
-@media (max-width: 550px) {
+/* xs */
+@media (max-width: 480px) {
+  .section-title h2 {
+    font-size: 16px;
+    letter-spacing: 3px;
+  }
+
   .section-title p {
-    font-size:15px;
+    font-size: 12px;
   }
 }

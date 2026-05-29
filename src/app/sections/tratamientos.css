@@ -1,44 +1,65 @@
-#titulo {
+/* ── TREATMENTS SECTION (home page) ── */
+
+#tratamientos {
   width: 100%;
   min-height: 100vh;
-  background-color: #310E04;
+  background: transparent;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 50px 0px;
+  padding: 60px 0 56px;
+  position: relative;
 }
 
-.texto{
-  padding: 0px 20px; 
+.texto {
+  padding: 0 20px;
+  position: relative;
+  z-index: 2;
 }
 
-/* BOTÓN */
+/* GRID */
+.treatments-grid {
+  width: 100%;
+  max-width: 1150px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  justify-items: center;
+  gap: 20px;
+  padding: 0 40px;
+  position: relative;
+  z-index: 2;
+}
+
+/* VER MÁS BUTTON */
 .ver-mas-container {
-  margin-top: 30px;
+  margin-top: 36px;
   display: flex;
   justify-content: center;
+  position: relative;
+  z-index: 2;
 }
 
 .ver-mas-btn {
   background: transparent;
   border: none;
-  font-family: 'Josefin Sans', serif;
-  font-size: 17px;
-  font-weight: 550;
-  letter-spacing: 1px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
   cursor: pointer;
   color: #c3b296;
   position: relative;
+  padding: 0;
 }
 
-/* Línea elegante */
 .ver-mas-btn::after {
-  content: "";
+  content: '';
   display: block;
   width: 0%;
-  height: 2px;
+  height: 1px;
   background: #c3b296;
-  transition: 0.3s;
+  transition: width 0.3s;
   margin-top: 5px;
 }
 
@@ -46,75 +67,31 @@
   width: 100%;
 }
 
-/* GRID BASE */
-.treatments-grid {
-  width: 100%;
-  max-width: 1150px;
-  display: grid;
-  /*define cuantas trajetas hay por fila y como se comportan
-  auto-fit: Mete tantas columnas como quepan en el ancho disponible
-  250px ancho minimo-1fr ancho máximo (todas las tarjetas se reparten en el espacio restante)*/
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  justify-items: center;
-  gap: 20px;
-  margin-top: 0px;
-  padding-left: 0px;
-  padding-right: 0px;
-  transition: max-height 0.5s ease;
-}
+/* md */
+@media (max-width: 992px) {
+  #tratamientos {
+    padding: 50px 0;
+  }
 
-
-@media (max-width: 1380px) {
   .treatments-grid {
-    padding-left: 40px;
-    padding-right: 40px;
+    padding: 0 60px;
   }
 }
 
+/* sm */
+@media (max-width: 768px) {
+  #tratamientos {
+    padding: 40px 0;
+  }
 
-@media (max-width: 979px) {
   .treatments-grid {
-    padding-left: 100px;
-    padding-right: 100px;
+    padding: 0 24px;
   }
 }
 
-
-
-@media (max-width: 890px) {
-  #titulo {
-    padding-top: 30px;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-}
-
-
-@media (max-width: 799px) {
+/* xs */
+@media (max-width: 480px) {
   .treatments-grid {
-    padding-left: 60px;
-    padding-right: 60px;
-  }
-}
-
-
-@media (max-width: 416px) {
-  .treatments-grid {
-    padding-left: 40px;
-    padding-right: 40px;
-  }
-}
-
-
-@media (max-width: 379px) {
-  .treatments-grid {
-    padding-left: 0px;
-    padding-right: 0px;
-  }
-}
-
-@media (max-width: 580px) {
-  .ver-mas-btn {
-    font-size: 15px;
+    padding: 0 16px;
   }
 }

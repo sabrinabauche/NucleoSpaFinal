@@ -1,0 +1,299 @@
+.td-page {
+  background: linear-gradient(to bottom, #4a2810 0%, #5e3418 40%, #7e4826 100%);
+  min-height: 100vh;
+}
+
+/* ── HERO ── */
+.td-hero {
+  position: relative;
+  width: 100%;
+  height: 88vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.td-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(20, 8, 2, 0.2) 0%,
+    rgba(20, 8, 2, 0.1) 35%,
+    rgba(22, 10, 3, 0.82) 78%,
+    rgba(25, 14, 6, 1) 100%
+  );
+}
+
+.td-back {
+  position: absolute;
+  top: 100px;
+  left: 48px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  color: rgba(196, 168, 122, 0.7);
+  text-decoration: none;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+  z-index: 2;
+}
+.td-back:hover { color: #c4a87a; }
+
+.td-hero__title {
+  position: relative;
+  z-index: 2;
+  padding: 0 60px 56px;
+  max-width: 760px;
+}
+
+.td-hero__title h1 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 48px;
+  font-weight: 300;
+  color: #ffffff;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin: 0 0 20px;
+}
+
+.td-hero__line {
+  width: 56px;
+  height: 1px;
+  background: #c4a87a;
+  margin-bottom: 22px;
+}
+
+.td-hero__duration {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: rgba(215, 200, 178, 0.75);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin: 0;
+}
+
+/* ── STATS STRIP ── */
+.td-stats {
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid rgba(196, 168, 122, 0.1);
+  background: rgba(10, 5, 2, 0.35);
+}
+
+.td-stat {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 28px 40px;
+  border-right: 1px solid rgba(196, 168, 122, 0.1);
+  flex: 1;
+  max-width: 300px;
+}
+.td-stat:last-child { border-right: none; }
+
+.td-stat__icon {
+  font-size: 22px;
+  color: #c4a87a;
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.td-stat__text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.td-stat__label {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(196, 168, 122, 0.55);
+  display: block;
+}
+
+.td-stat__value {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: #e0d4c0;
+  letter-spacing: 0.5px;
+  display: block;
+}
+
+/* ── BODY ── */
+.td-body {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 56px 60px 72px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* ── SECTION BLOCK ── */
+.td-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.td-section-label {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #c4a87a;
+  margin: 0 0 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(196, 168, 122, 0.15);
+}
+
+/* DESCRIPTION */
+.td-description {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 18px;
+  line-height: 2;
+  color: #d4c4ac;
+  font-weight: 300;
+  letter-spacing: 0.3px;
+  margin: 0 0 28px;
+}
+
+/* WARNING */
+.td-warning {
+  padding: 16px 20px;
+  background: rgba(155, 92, 51, 0.1);
+  border-left: 2px solid #9b5c33;
+  border-radius: 4px;
+  margin-top: 4px;
+}
+
+.td-warning span {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 14px;
+  color: #c0a888;
+  line-height: 1.7;
+}
+
+/* ── BENEFITS GRID ── */
+.td-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.td-benefit-card {
+  background: rgba(196, 168, 122, 0.04);
+  border: 1px solid rgba(196, 168, 122, 0.12);
+  border-radius: 8px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.td-benefit-card:hover {
+  background: rgba(196, 168, 122, 0.08);
+  border-color: rgba(196, 168, 122, 0.28);
+}
+
+.td-benefit__text {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 13px;
+  color: #c8b49c;
+  line-height: 1.55;
+  letter-spacing: 0.3px;
+}
+
+/* ── TECHNOLOGY CHIPS ── */
+.td-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.td-chip {
+  display: inline-flex;
+  align-items: center;
+  background: transparent;
+  border: 1px solid rgba(196, 168, 122, 0.25);
+  border-radius: 20px;
+  padding: 9px 18px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 12px;
+  color: #c8b49c;
+  letter-spacing: 1px;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.td-chip:hover {
+  background: rgba(196, 168, 122, 0.08);
+  border-color: rgba(196, 168, 122, 0.45);
+}
+
+/* ── BOOKING ── */
+.td-booking {
+  border-top: 1px solid rgba(196, 168, 122, 0.12);
+  padding: 72px 60px 80px;
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+/* ── md (992px) ── */
+@media (max-width: 992px) {
+  .td-hero { height: 75vh; }
+  .td-hero__title h1 { font-size: 38px; }
+  .td-hero__duration { font-size: 20px; }
+  .td-hero__title { padding: 0 40px 48px; }
+
+  .td-stats { flex-wrap: wrap; }
+  .td-stat { padding: 22px 28px; max-width: none; flex: 1 1 40%; }
+
+  .td-body { padding: 44px 40px 56px; gap: 36px; }
+  .td-booking { padding: 56px 40px 64px; }
+}
+
+/* ── sm (768px) ── */
+@media (max-width: 768px) {
+  .td-hero { height: 70vh; }
+  .td-hero__title { padding: 0 24px 40px; }
+  .td-hero__title h1 { font-size: 30px; letter-spacing: 3px; }
+  .td-hero__duration { font-size: 18px; letter-spacing: 3px; }
+  .td-back { left: 24px; top: 88px; }
+
+  .td-stats { flex-direction: column; }
+  .td-stat { max-width: none; border-right: none; border-bottom: 1px solid rgba(196, 168, 122, 0.1); padding: 18px 24px; }
+  .td-stat:last-child { border-bottom: none; }
+
+  .td-body { padding: 36px 24px 48px; gap: 32px; }
+  .td-benefits-grid { grid-template-columns: repeat(2, 1fr); }
+  .td-booking { padding: 48px 24px 64px; }
+}
+
+/* ── xs (480px) ── */
+@media (max-width: 480px) {
+  .td-hero { height: 65vh; }
+  .td-hero__title { padding: 0 16px 32px; }
+  .td-hero__title h1 { font-size: 26px; letter-spacing: 2px; }
+  .td-hero__duration { font-size: 16px; letter-spacing: 2px; }
+  .td-back { left: 16px; }
+
+  .td-body { padding: 36px 16px 48px; gap: 40px; }
+  .td-benefits-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .td-benefit-card { padding: 22px 14px 18px; }
+  .td-booking { padding: 40px 16px 56px; }
+  .td-stat { padding: 16px; gap: 12px; }
+  .td-stat__icon { font-size: 18px; }
+}

@@ -1,0 +1,364 @@
+/* ── OVERLAY ── */
+.booking-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.88);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* ── MODAL BOX ── */
+.booking-modal {
+  background: #1a1814;
+  border: 1px solid rgba(195, 178, 150, 0.18);
+  border-radius: 12px;
+  padding: 44px 48px;
+  width: 100%;
+  max-width: 540px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  scrollbar-width: none;
+}
+.booking-modal::-webkit-scrollbar { display: none; }
+
+/* ── CLOSE ── */
+.booking-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  color: rgba(195, 178, 150, 0.6);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+}
+.booking-close:hover { color: #ffffff; }
+
+/* ── STEP DOTS ── */
+.booking-steps {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+.booking-step-dot {
+  height: 2px;
+  width: 32px;
+  background: rgba(195, 178, 150, 0.2);
+  border-radius: 2px;
+  transition: background 0.3s;
+}
+.booking-step-dot.active { background: #c3b296; }
+
+/* ── STEP WRAPPER ── */
+.booking-step {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── TITLE ── */
+.booking-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 17px;
+  font-weight: 300;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 24px;
+}
+
+/* ── TREATMENT PILLS ── */
+.treatment-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+.treatment-option {
+  background: transparent;
+  border: 1px solid rgba(195, 178, 150, 0.25);
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  padding: 7px 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.treatment-option:hover {
+  border-color: #c3b296;
+  color: #ffffff;
+}
+.treatment-option.selected {
+  border-color: #c3b296;
+  color: #c3b296;
+  background: rgba(195, 178, 150, 0.07);
+}
+
+/* ── CALENDAR ── */
+.booking-calendar {
+  margin-bottom: 24px;
+}
+
+.calendar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.calendar-nav span {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 12px;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.calendar-nav button {
+  background: transparent;
+  border: 1px solid rgba(195, 178, 150, 0.25);
+  color: #c3b296;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.calendar-nav button:hover:not(:disabled) {
+  border-color: #c3b296;
+  background: rgba(195, 178, 150, 0.1);
+}
+.calendar-nav button:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+}
+.calendar-weekday {
+  text-align: center;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: #c3b296;
+  padding: 4px 0 10px;
+}
+.calendar-day {
+  text-align: center;
+  padding: 8px 2px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 12px;
+  color: #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+  user-select: none;
+}
+.calendar-day:not(.empty):not(.past):hover {
+  background: rgba(195, 178, 150, 0.1);
+}
+.calendar-day.empty { cursor: default; }
+.calendar-day.past {
+  color: rgba(255, 255, 255, 0.18);
+  cursor: not-allowed;
+}
+.calendar-day.selected {
+  background: #c3b296;
+  color: #0c0b09;
+  font-weight: 600;
+}
+
+/* ── TIME SLOTS ── */
+.time-slots {
+  margin-bottom: 8px;
+}
+.time-slots__label {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #c3b296;
+  margin-bottom: 10px;
+}
+.time-slots__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.time-slot {
+  background: transparent;
+  border: 1px solid rgba(195, 178, 150, 0.25);
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.55);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  padding: 9px 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+.time-slot:hover {
+  border-color: #c3b296;
+  color: #ffffff;
+}
+.time-slot.selected {
+  border-color: #c3b296;
+  background: rgba(195, 178, 150, 0.1);
+  color: #c3b296;
+}
+
+/* ── CONTACT FORM ── */
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.booking-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.booking-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.booking-field label {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #c3b296;
+}
+.booking-field input {
+  background: transparent;
+  border: 1px solid rgba(195, 178, 150, 0.3);
+  border-radius: 4px;
+  padding: 10px 14px;
+  color: #ffffff;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+.booking-field input::placeholder { color: rgba(255, 255, 255, 0.2); }
+.booking-field input:focus { border-color: #c3b296; }
+
+/* ── SUMMARY ── */
+.booking-summary {
+  background: rgba(195, 178, 150, 0.06);
+  border: 1px solid rgba(195, 178, 150, 0.18);
+  border-radius: 4px;
+  padding: 12px 16px;
+}
+.booking-summary p {
+  margin: 0;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 12px;
+  color: #c3b296;
+  letter-spacing: 0.5px;
+  line-height: 1.8;
+}
+
+/* ── NAV ── */
+.booking-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+}
+.booking-nav--end { justify-content: flex-end; }
+
+/* ── BUTTONS ── */
+.booking-btn {
+  background: transparent;
+  border: 1px solid #c3b296;
+  border-radius: 4px;
+  color: #ffffff;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.booking-btn:hover:not(:disabled) {
+  background: #c3b296;
+  color: #0c0b09;
+}
+.booking-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.booking-btn-ghost {
+  background: transparent;
+  border: none;
+  color: rgba(195, 178, 150, 0.5);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  padding: 12px 0;
+  transition: color 0.2s;
+}
+.booking-btn-ghost:hover { color: #c3b296; }
+
+/* ── SUCCESS ── */
+.booking-success {
+  text-align: center;
+  padding: 24px 0;
+}
+.booking-success__icon {
+  display: block;
+  font-size: 36px;
+  color: #c3b296;
+  margin-bottom: 20px;
+}
+.booking-success h2 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 300;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 14px;
+}
+.booking-success p {
+  color: #888888;
+  font-size: 13px;
+  line-height: 1.8;
+  margin-bottom: 28px;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .booking-modal { padding: 36px 28px; }
+}
+
+@media (max-width: 480px) {
+  .booking-modal { padding: 32px 16px; }
+  .booking-row { grid-template-columns: 1fr; }
+  .booking-nav { flex-direction: column-reverse; gap: 10px; }
+  .booking-nav--end { flex-direction: column; }
+  .booking-btn { width: 100%; text-align: center; }
+}

@@ -1,0 +1,123 @@
+.resenas-section {
+  background: transparent;
+  padding: 80px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* GRID */
+.resenas-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+  max-width: 1100px;
+  margin-top: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+/* CARD */
+.resena-card {
+  background: rgba(180, 90, 30, 0.05);
+  border: 1px solid rgba(196, 168, 122, 0.12);
+  border-radius: 12px;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: border-color 0.3s ease;
+}
+
+.resena-card:hover {
+  border-color: rgba(196, 168, 122, 0.25);
+}
+
+/* STARS */
+.resena-stars {
+  font-size: 16px;
+  color: #c4a87a;
+  letter-spacing: 3px;
+}
+
+/* TEXT */
+.resena-text {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.85;
+  color: #c8b89e;
+  margin: 0;
+  flex: 1;
+}
+
+/* AUTHOR */
+.resena-author {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(196, 168, 122, 0.1);
+}
+
+.resena-name {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #d4c4ad;
+}
+
+.resena-treatment {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #9b5c33;
+}
+
+/* md */
+@media (max-width: 992px) {
+  .resenas-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .resena-card:last-child {
+    grid-column: 1 / -1;
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+/* sm */
+@media (max-width: 768px) {
+  .resenas-section {
+    padding: 60px 24px;
+  }
+
+  .resenas-grid {
+    grid-template-columns: 1fr;
+    margin-top: 40px;
+  }
+
+  .resena-card:last-child {
+    grid-column: auto;
+    max-width: none;
+  }
+
+  .resena-card {
+    padding: 28px 24px;
+  }
+}
+
+/* xs */
+@media (max-width: 480px) {
+  .resenas-section {
+    padding: 48px 16px;
+  }
+}

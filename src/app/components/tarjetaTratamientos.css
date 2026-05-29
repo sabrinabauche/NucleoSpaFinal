@@ -1,94 +1,89 @@
 .treatment-card {
   position: relative;
-  /*controla ancho y alto de cada tarjeta*/
   width: 100%;
   max-width: 350px;
   aspect-ratio: 1;
-  border-radius: 50px;
-  margin: o auto; 
+  border-radius: 40px;
+  margin: 0 auto;
   overflow: hidden;
   background-size: cover;
-  justify-self: center;
   background-position: center;
+  justify-self: center;
   cursor: pointer;
 }
 
-/* OVERLAY BASE (siempre visible abajo) */
+/* OVERLAY */
 .treatment-card .overlay {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
-  padding: 20px 20px 10px 20px;
-
-  /* GRADIENTE en lugar de fondo sólido */
+  padding: 20px;
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.65) 0%,   /* oscuro abajo */
-    rgba(0, 0, 0, 0.3) 30%,   /* transición */
-    rgba(0, 0, 0, 0) 60%      /* transparente arriba */
+    rgba(28, 10, 2, 0.82) 0%,
+    rgba(18, 6, 1, 0.38) 38%,
+    rgba(0, 0, 0, 0) 68%
   );
-
-  transition: all 0.3s ease;
+  transition: background 0.4s ease;
 }
 
-/* CONTENIDO */
 .treatment-card .content {
-  color: #F5F5F5;
+  color: #f5f5f5;
 }
 
-/* TITULO SIEMPRE VISIBLE 
-controla tamaño de letra y estilo del titulo de la card*/
 .treatment-card h3 {
   margin: 0;
-  font-weight: 600;
-  font-size: 18px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 500;
+  font-size: 17px;
+  letter-spacing: 2px;
   text-transform: uppercase;
-  font-family: 'Josefin Sans', serif;
 }
 
-/* DESCRIPCIÓN OCULTA POR DEFAULT 
-controla el estilo del texto de la card*/
 .treatment-card p {
-  margin-top: 8px;
-  line-height: 1.4;
-  font-family: 'Josefin Sans', serif;
+  margin-top: 10px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.65;
   opacity: 0;
-  font-size: 17px;
-  transform: translateY(10px);
+  transform: translateY(8px);
   max-height: 0;
   overflow: hidden;
   transition: all 0.3s ease;
 }
 
-/* HOVER → MÁS OSCURO TODO */
 .treatment-card:hover .overlay {
-  background: rgba(0, 0, 0, 0.6);
+  background: linear-gradient(
+    to top,
+    rgba(28, 10, 2, 0.94) 0%,
+    rgba(18, 6, 1, 0.52) 40%,
+    rgba(6, 2, 0, 0.08) 72%
+  );
 }
 
-/* HOVER → APARECE DESCRIPCIÓN */
 .treatment-card:hover p {
   opacity: 1;
   transform: translateY(0);
   max-height: 200px;
 }
 
-@media (max-width: 1101px) {
-  .treatment-card h3 {
-    font-size:16px;
-  }
-}
-
-
-@media (max-width: 1101px) {
-  .treatment-card p {
-    font-size:15px;
-  }
-}
-
-@media (max-width: 379px) {
+/* sm */
+@media (max-width: 768px) {
   .treatment-card {
-  max-width: 250px;
+    border-radius: 28px;
+  }
+
+  .treatment-card h3 {
+    font-size: 14px;
+  }
+}
+
+/* xs */
+@media (max-width: 480px) {
+  .treatment-card {
+    max-width: 300px;
   }
 }

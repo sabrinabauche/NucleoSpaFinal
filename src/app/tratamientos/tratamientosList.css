@@ -1,0 +1,116 @@
+.treatments-page {
+  background: linear-gradient(to bottom, #4a2810 0%, #5e3418 40%, #7e4826 100%);
+  min-height: 100vh;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.treatments-page__header {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 56px 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* SEARCH */
+.treatments-search {
+  margin-top: 32px;
+  width: 100%;
+  max-width: 480px;
+  position: relative;
+}
+
+.treatments-search__icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(195, 178, 150, 0.6);
+  font-size: 15px;
+  pointer-events: none;
+}
+
+.treatments-search input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(195, 178, 150, 0.35);
+  border-radius: 8px;
+  padding: 14px 20px 14px 46px;
+  color: #ffffff;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.treatments-search input::placeholder {
+  color: rgba(195, 178, 150, 0.55);
+}
+
+.treatments-search input:focus {
+  border-color: #c3b296;
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.treatments-search input:focus + .treatments-search__icon,
+.treatments-search:focus-within .treatments-search__icon {
+  color: #c3b296;
+}
+
+/* GRID */
+.treatments-page__grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 40px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 28px;
+  justify-items: center;
+}
+
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-family: 'Josefin Sans', sans-serif;
+  color: rgba(195, 178, 150, 0.55);
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 60px 0;
+}
+
+/* md */
+@media (max-width: 992px) {
+  .treatments-page__header {
+    padding: 40px 60px 24px;
+  }
+
+  .treatments-page__grid {
+    padding: 32px 60px 0;
+  }
+}
+
+/* sm */
+@media (max-width: 768px) {
+  .treatments-page__header {
+    padding: 36px 24px 20px;
+  }
+
+  .treatments-page__grid {
+    padding: 28px 24px 0;
+  }
+}
+
+/* xs */
+@media (max-width: 480px) {
+  .treatments-page__header {
+    padding: 28px 16px 16px;
+  }
+
+  .treatments-page__grid {
+    padding: 24px 16px 0;
+  }
+}

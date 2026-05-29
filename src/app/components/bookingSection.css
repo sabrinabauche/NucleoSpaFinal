@@ -1,0 +1,374 @@
+/* ─────────────────────────────────────────
+   BREAKPOINTS used here:
+   md  ≤ 992px   tablet landscape
+   sm  ≤ 768px   tablet portrait
+   xs  ≤ 480px   mobile
+───────────────────────────────────────── */
+
+/* ── WRAPPER ── */
+.bs-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ── HEADER ── */
+.bs-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.bs-header h2 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 17px;
+  font-weight: 300;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-bottom: 6px;
+}
+
+.bs-header p {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  color: #c3b296;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ── BODY: calendar centered, time slots expand on date select ── */
+.bs-body {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 36px;
+}
+
+/* ── CALENDAR ── */
+.bs-calendar {
+  width: 560px;
+  max-width: 100%;
+  flex-shrink: 0;
+}
+
+.bs-cal-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.bs-cal-nav span {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 12px;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+}
+
+.bs-cal-nav button {
+  background: transparent;
+  border: 1px solid rgba(195, 178, 150, 0.3);
+  color: #c3b296;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  line-height: 1;
+}
+
+.bs-cal-nav button:hover:not(:disabled) {
+  background: rgba(195, 178, 150, 0.1);
+  border-color: #c3b296;
+}
+
+.bs-cal-nav button:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.bs-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.bs-weekday {
+  text-align: center;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  color: #c3b296;
+  letter-spacing: 1px;
+  padding: 4px 0 12px;
+}
+
+.bs-day {
+  text-align: center;
+  padding: 20px 4px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 15px;
+  color: #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+  user-select: none;
+}
+
+.bs-day:not(.empty):not(.past):hover {
+  background: rgba(195, 178, 150, 0.12);
+}
+
+.bs-day.empty { cursor: default; }
+
+.bs-day.past {
+  color: rgba(255, 255, 255, 0.18);
+  cursor: not-allowed;
+}
+
+.bs-day.selected {
+  background: #c3b296;
+  color: #0c0b09;
+  font-weight: 600;
+}
+
+/* ── TIME SLOTS ── */
+.bs-times {
+  flex-shrink: 0;
+  width: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.3s ease 0.15s;
+}
+
+.bs-times.visible {
+  width: 360px;
+  opacity: 1;
+  pointer-events: all;
+}
+
+.bs-times__label {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  color: #c3b296;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 14px;
+  min-height: 18px;
+  padding-left: 48px;
+  white-space: nowrap;
+}
+
+.bs-times__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding-left: 48px;
+  min-width: 312px;
+}
+
+.bs-time {
+  background: transparent;
+  border: 1px solid rgba(195, 178, 150, 0.3);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.75);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 15px;
+  letter-spacing: 1px;
+  padding: 13px 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.bs-time:hover {
+  border-color: #c3b296;
+  color: #ffffff;
+}
+
+.bs-time.selected {
+  border-color: #c3b296;
+  background: rgba(195, 178, 150, 0.1);
+  color: #c3b296;
+}
+
+/* ── CONTACT FORM ── */
+.bs-form {
+  border-top: 1px solid rgba(195, 178, 150, 0.12);
+  padding-top: 32px;
+}
+
+.bs-form__selected {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 24px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 12px;
+  color: #c3b296;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.bs-form__fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.bs-form__field--full {
+  grid-column: 1 / -1;
+}
+
+.bs-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.bs-form__field label {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #c3b296;
+}
+
+.bs-form__field input {
+  background: transparent;
+  border: 1px solid rgba(195, 178, 150, 0.3);
+  border-radius: 4px;
+  padding: 11px 14px;
+  color: #ffffff;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.bs-form__field input::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.bs-form__field input:focus {
+  border-color: #c3b296;
+}
+
+/* ── SUBMIT ── */
+.bs-submit {
+  background: transparent;
+  border: 1px solid #c3b296;
+  border-radius: 4px;
+  color: #ffffff;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 13px 36px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: block;
+  margin-left: auto;
+}
+
+.bs-submit:hover {
+  background: #c3b296;
+  color: #0c0b09;
+}
+
+/* ── SUCCESS ── */
+.bs-success {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.bs-success__icon {
+  display: block;
+  font-size: 36px;
+  color: #c3b296;
+  margin-bottom: 16px;
+}
+
+.bs-success h3 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 17px;
+  font-weight: 300;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+}
+
+.bs-success p {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 13px;
+  color: #888;
+  line-height: 1.7;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+/* ── RESPONSIVE ── */
+
+/* md: tablet landscape */
+@media (max-width: 992px) {
+  .bs-body {
+    gap: 40px;
+  }
+
+  .bs-day {
+    padding: 12px 2px;
+    font-size: 14px;
+  }
+}
+
+/* sm: tablet portrait */
+@media (max-width: 768px) {
+  .bs-body {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .bs-times {
+    width: 100% !important;
+    max-width: 480px;
+    opacity: 1 !important;
+    pointer-events: all;
+    overflow: visible;
+    margin-top: 32px;
+  }
+
+  .bs-times__label,
+  .bs-times__grid {
+    padding-left: 0;
+  }
+
+  .bs-times__grid {
+    min-width: unset;
+  }
+}
+
+/* xs: mobile */
+@media (max-width: 480px) {
+  .bs-day {
+    padding: 8px 2px;
+    font-size: 12px;
+  }
+
+  .bs-form__fields {
+    grid-template-columns: 1fr;
+  }
+
+  .bs-submit {
+    width: 100%;
+    text-align: center;
+  }
+}

@@ -1,8 +1,7 @@
-/* ================= DESKTOP ================= */
+/* ── DESKTOP ── */
 #navbar {
   display: flex;
   justify-content: center;
-  flex: 1;
 }
 
 .navbar ul {
@@ -11,7 +10,7 @@
   display: flex;
   list-style: none;
   align-items: center;
-  gap: 70px; /*espacio entre opciones menu*/
+  gap: 80px;
 }
 
 .navbar li {
@@ -22,8 +21,8 @@
   display: flex;
   align-items: center;
   padding: 10px 0;
-  /*tamaño elementos del menu*/
-  font-size: 18px;
+  font-size: 16px;
+  letter-spacing: 1.5px;
   color: #ffffff;
   opacity: 0.5;
   transition: opacity 0.3s ease;
@@ -36,20 +35,44 @@
   opacity: 1;
 }
 
-/* ================= MOBILE TOGGLE ================= */
+/* ── MOBILE TOGGLE ── */
 .mobile-nav-toggle {
   color: #ffffff;
-  /*tamaño del elemento de menu*/
   font-size: 28px;
   cursor: pointer;
   display: none;
   line-height: 0;
+  flex-shrink: 0;
+  margin-left: auto;
 }
 
+/* lg: button starts shrinking here — give nav more room */
+@media (max-width: 1200px) {
+  .navbar ul {
+    gap: 60px;
+  }
+
+  .navbar a {
+    font-size: 15px;
+  }
+}
+
+/* md: tablet — nav visible, tighter */
 @media (max-width: 992px) {
+  .navbar ul {
+    gap: 44px;
+  }
+
+  .navbar a {
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+}
+
+/* sm: hamburger kicks in */
+@media (max-width: 768px) {
   .mobile-nav-toggle {
     display: block;
-    margin-left: auto;
   }
 
   #navbar {
@@ -61,7 +84,7 @@
   }
 }
 
-/* ================= MOBILE MENU OPEN ================= */
+/* ── MOBILE MENU OPEN ── */
 .navbar-mobile {
   position: fixed;
   inset: 0;
@@ -75,27 +98,24 @@
   right: 15px;
 }
 
-/* popup menu */
 .navbar-mobile ul {
   position: absolute;
   top: 60px;
-  gap: 0px;
   right: 20px;
-  width: 240px;
+  width: 220px;
   display: flex;
   flex-direction: column;
-  padding: 10px 20px; 
+  gap: 0;
+  padding: 10px 20px;
   border-radius: 8px;
   background-color: #ffffff;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  align-items: center; /* 👈 centra los li */
+  align-items: center;
 }
 
-
 .navbar-mobile a {
-  padding: 6px 12px; /*padding de cada elemento*/
-  /*tamaño de elementos del menu mobile*/
-  font-size: 17px;
+  padding: 6px 12px;
+  font-size: 15px;
   color: #000;
   opacity: 0.7;
   transition: opacity 0.3s ease;
@@ -104,7 +124,7 @@
 .navbar-mobile li {
   width: 100%;
   display: flex;
-  justify-content: center; /* 👈 centra el contenido */
+  justify-content: center;
 }
 
 .navbar-mobile a:hover,
@@ -115,22 +135,20 @@
   color: #000000;
 }
 
-/* appointment button */
 .navbar-mobile .mobile-version {
-  font-size: 12px;
+  font-size: 11px;
   width: 100%;
-  padding: 12px;
-  border: 1.57px solid #000;
+  padding: 11px;
+  border: 1px solid #000;
   margin-top: 5px;
-  margin-right: 15px;
-  border-radius: 2px;
+  border-radius: 4px;
   color: #000;
   background: transparent;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   transition: all 0.3s ease;
 }
 
 .navbar-mobile .mobile-version:hover {
-  background: rgba(114, 98, 98, 0.437);
-  border-color: #000;
-  color: #000;
+  background: rgba(0, 0, 0, 0.08);
 }

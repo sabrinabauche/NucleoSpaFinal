@@ -1,5 +1,7 @@
-import React from 'react'
+'use client';
+
 import './heroBtn.css';
+import { useBooking } from '../context/BookingContext';
 
 type HeroBtnProps = {
   name: string;
@@ -7,14 +9,16 @@ type HeroBtnProps = {
 };
 
 export default function HeroBtn({ name, target }: HeroBtnProps) {
-  const handleScrollTo = (section: string) => {};
+  const { openModal } = useBooking();
+
+  const handleClick = () => {
+    openModal(target === 'contact' ? 'diagnostico' : '');
+  };
 
   return (
     <a
-      onClick={() => handleScrollTo(target)}
-      className={`btn-hero animated fadeInUp scrollto ${
-        name.toLowerCase().includes("book") ? "ms-4" : ""
-      }`}
+      onClick={handleClick}
+      className={`btn-hero animated fadeInUp ${target === 'contact' ? 'ms-4' : ''}`}
     >
       {name}
     </a>

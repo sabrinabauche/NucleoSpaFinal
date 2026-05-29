@@ -1,44 +1,79 @@
 /*--------------------------------------------------------------
-# General
+# Global
 --------------------------------------------------------------*/
+
+:root {
+  --gold: #c4a87a;
+  --gold-muted: rgba(196, 168, 122, 0.65);
+  --terracotta: #9b5c33;
+  --bg-dark: #4a2810;
+  --bg-earth: #2a1508;
+  --bg-panel: #1e1208;
+  --text-body: #b8a48a;
+}
+
+html {
+  scroll-behavior: smooth;
+  min-height: 100%;
+  background: linear-gradient(
+    to bottom,
+    #160802 0%,
+    #2a1408 20%,
+    #4a2810 48%,
+    #5e3418 72%,
+    #6a3c20 100%
+  ) no-repeat;
+  background-size: 100% 100%;
+}
 
 body {
   font-family: 'Josefin Sans', sans-serif !important;
-  background: #0c0b09 !important;
+  background: transparent !important;
+  min-height: 100%;
   color: #ffffff;
 }
 
 a {
-  color: #cd9447;
+  color: var(--gold);
   text-decoration: none !important;
 }
 
 a:hover {
-  color: #cd9447;
+  color: var(--gold);
   text-decoration: none !important;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   font-family: 'Josefin Sans', serif;
 }
 
-body::-webkit-scrollbar{
+body::-webkit-scrollbar {
   display: none;
 }
 
-/*Section settings*/
 section {
   padding: 60px 0;
-  overflow: hidden;
 }
 
-.section-bg{
-  background-color: #1a1814;
+.section-bg {
+  background-color: var(--bg-panel);
 }
 
+/*--------------------------------------------------------------
+# Scroll reveal
+--------------------------------------------------------------*/
 
+.will-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.will-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.12s; }
+.reveal-delay-2 { transition-delay: 0.24s; }
+.reveal-delay-3 { transition-delay: 0.36s; }

@@ -1,0 +1,74 @@
+.agendar-section {
+  background: transparent;
+  padding: 80px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.agendar-section__title {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.agendar-section__label {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  color: rgba(195, 178, 150, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-bottom: 14px;
+}
+
+.agendar-section__title h2 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #c3b296;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  margin-bottom: 16px;
+}
+
+.agendar-section__line {
+  width: 60px;
+  height: 1px;
+  background: #c3b296;
+  margin: 0 auto;
+}
+
+/* md */
+@media (max-width: 992px) {
+  .agendar-section__title h2 {
+    font-size: 18px;
+    letter-spacing: 4px;
+  }
+}
+
+/* sm */
+@media (max-width: 768px) {
+  .agendar-section {
+    padding: 60px 24px;
+  }
+
+  .agendar-section__title {
+    margin-bottom: 40px;
+  }
+
+  .agendar-section__title h2 {
+    font-size: 17px;
+    letter-spacing: 4px;
+  }
+}
+
+/* xs */
+@media (max-width: 480px) {
+  .agendar-section {
+    padding: 48px 16px;
+  }
+
+  .agendar-section__title h2 {
+    font-size: 15px;
+    letter-spacing: 3px;
+  }
+}

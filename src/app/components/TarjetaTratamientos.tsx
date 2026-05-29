@@ -1,20 +1,22 @@
-import React from "react";
+'use client';
+
+import { useRouter } from "next/navigation";
 import "./tarjetaTratamientos.css";
 
 type TreatmentCardProps = {
   image: string;
   title: string;
   description: string;
+  slug: string;
 };
 
-export default function TreatmentCard({
-  image,
-  title,
-  description,
-}: TreatmentCardProps) {
+export default function TreatmentCard({ image, title, description, slug }: TreatmentCardProps) {
+  const router = useRouter();
+
   return (
     <div
       className="treatment-card"
+      onClick={() => router.push(`/tratamientos/${slug}`)}
       style={{ backgroundImage: `url(${image})` }}
     >
       <div className="overlay">

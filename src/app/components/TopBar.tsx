@@ -1,43 +1,29 @@
-//server components: all the data and prep of the page will be ready from the server side
-//client component: the browsers starts to build your page
-//if you have a lot of user interactions you have to use a client component (synamic)
-//we will use a client component for animations
-//default it will be a server component, if we are building a client component we have to specify it.
+'use client';
 
-'use client'
-
-import React, {useState,useEffect} from 'react';
+import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import './topBar.css';
-export default function TopBar(){
-    //we need the scroll position to know when to hide the topbar
-    const [scroll, setScroll] = useState(0);
-    //the effect runs every time scroll changes
-    useEffect(() => {
-  window.addEventListener('scroll', () => {
-    setScroll(window.scrollY);
-  });
 
-  return () => {
-    window.removeEventListener('scroll', () => {
-      setScroll(window.scrollY);
-    });
-  };
-}, [scroll]);
+export default function TopBar() {
+  const [scroll, setScroll] = useState(0);
+  const pathname = usePathname();
 
-return (
-  <div
-    id="topbar"
-    className={`d-flex align-items-center fixed-top ${
-      scroll > 100 ? 'topbar-scrolled' : undefined
-    }`}
-  >
-    <div className="container d-flex justify-content-center justify-content-md-between">
-      
-      <div className="languages d-none d-md-flex align-items-center">
+  useEffect(() => {
+    const handleScroll = () => setScroll(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
+  if (pathname !== '/') return null;
+
+  return (
+    <div
+      id="topbar"
+      className={`d-flex align-items-center fixed-top ${scroll > 100 ? 'topbar-scrolled' : ''}`}
+    >
+      <div className="container d-flex justify-content-center justify-content-md-between">
+        <div className="languages d-none d-md-flex align-items-center" />
       </div>
-
     </div>
-  </div>
-);
+  );
 }

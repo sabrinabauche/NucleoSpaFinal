@@ -1,21 +1,20 @@
+'use client';
 
-import React from 'react';
 import './appBtn.css';
 
-//we are going to on click make it navigate to a section of the page
-//we want our button to habe a name, as a reusable component
-//the bttn component belongs to the parent-the header
-//in typescript we need to define the type of variable name is
-export default function AppBtn({name}: {name:string}) {
-
-    const handleScrollTo=(section: string)=>{
-        //go to booking a table section
+export default function AppBtn({ name }: { name: string }) {
+  const handleClick = () => {
+    const el = document.getElementById('agendar');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.location.href = '/#agendar';
     }
+  };
 
-  return <a 
-  className="app-btn scrollto"
-  onClick={() => handleScrollTo('book-a-table')}
-  >
-    {name}
-  </a>;
+  return (
+    <a className="app-btn" onClick={handleClick}>
+      {name}
+    </a>
+  );
 }
