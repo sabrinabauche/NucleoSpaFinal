@@ -1,0 +1,320 @@
+/* ── MEMBRESÍAS SECTION ── */
+
+.mem-section {
+  width: 100%;
+  padding: 96px 40px 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative background orbs */
+.mem-section::before,
+.mem-section::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.mem-section::before {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(196, 168, 122, 0.06) 0%, transparent 70%);
+  top: -80px;
+  right: -100px;
+}
+
+.mem-section::after {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(196, 168, 122, 0.04) 0%, transparent 70%);
+  bottom: 0;
+  left: -80px;
+}
+
+/* ── HEADER ── */
+.mem-header {
+  text-align: center;
+  margin-bottom: 64px;
+  position: relative;
+  z-index: 1;
+}
+
+.mem-header__label {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: rgba(196, 168, 122, 0.55);
+  display: block;
+  margin-bottom: 14px;
+}
+
+.mem-header__title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: #c3b296;
+  margin: 0 0 18px;
+}
+
+.mem-header__line {
+  width: 56px;
+  height: 1px;
+  background: #c4a87a;
+  margin: 0 auto 20px;
+}
+
+.mem-header__sub {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(196, 168, 122, 0.5);
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+/* ── GRID ── */
+.mem-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 980px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  align-items: start;
+}
+
+/* ── CARD ── */
+.mem-card {
+  position: relative;
+  background: rgba(10, 5, 2, 0.28);
+  border: 1px solid rgba(196, 168, 122, 0.14);
+  border-radius: 2px;
+  padding: 40px 32px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.mem-card:hover {
+  border-color: rgba(196, 168, 122, 0.35);
+  transform: translateY(-4px);
+}
+
+/* ── HIGHLIGHT CARD ── */
+.mem-card--highlight {
+  background: rgba(196, 168, 122, 0.05);
+  border-color: rgba(196, 168, 122, 0.45);
+  transform: translateY(-10px);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(196, 168, 122, 0.2) inset;
+}
+
+.mem-card--highlight:hover {
+  border-color: rgba(196, 168, 122, 0.7);
+  transform: translateY(-14px);
+}
+
+/* ── BADGE ── */
+.mem-card__badge {
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #1a0d05;
+  background: #c4a87a;
+  padding: 5px 16px;
+  white-space: nowrap;
+  border-radius: 1px;
+}
+
+/* ── CARD TOP ── */
+.mem-card__top {
+  margin-bottom: 28px;
+}
+
+.mem-card__name {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 26px;
+  font-weight: 300;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #e8dcc8;
+  margin: 0 0 20px;
+}
+
+.mem-card--highlight .mem-card__name {
+  color: #f0e8d8;
+}
+
+.mem-card__divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, rgba(196, 168, 122, 0.4), transparent);
+}
+
+.mem-card--highlight .mem-card__divider {
+  background: linear-gradient(to right, rgba(196, 168, 122, 0.7), transparent);
+}
+
+/* ── FEATURES ── */
+.mem-card__features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.mem-card__feature {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  color: #c8b49c;
+  letter-spacing: 0.4px;
+  line-height: 1.5;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.mem-card__dot {
+  font-size: 5px;
+  color: #c4a87a;
+  flex-shrink: 0;
+  position: relative;
+  top: -1px;
+}
+
+.mem-card--highlight .mem-card__feature {
+  color: #ddd0b8;
+}
+
+/* ── CTA ── */
+.mem-card__cta {
+  margin-top: auto;
+  background: transparent;
+  border: 1px solid rgba(196, 168, 122, 0.3);
+  color: #c4a87a;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 14px 0;
+  width: 100%;
+  cursor: pointer;
+  transition: background 0.25s, border-color 0.25s, color 0.25s;
+  border-radius: 1px;
+}
+
+.mem-card__cta:hover {
+  background: rgba(196, 168, 122, 0.1);
+  border-color: rgba(196, 168, 122, 0.65);
+  color: #e0c99a;
+}
+
+.mem-card--highlight .mem-card__cta {
+  background: rgba(196, 168, 122, 0.12);
+  border-color: rgba(196, 168, 122, 0.5);
+}
+
+.mem-card--highlight .mem-card__cta:hover {
+  background: rgba(196, 168, 122, 0.22);
+  border-color: rgba(196, 168, 122, 0.85);
+}
+
+/* ── FOOTER NOTE ── */
+.mem-footer {
+  margin-top: 52px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  color: rgba(196, 168, 122, 0.38);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── md (992px) ── */
+@media (max-width: 992px) {
+  .mem-section {
+    padding: 80px 32px 84px;
+  }
+
+  .mem-grid {
+    gap: 20px;
+  }
+
+  .mem-card {
+    padding: 36px 24px 32px;
+  }
+
+  .mem-card__name {
+    font-size: 22px;
+    letter-spacing: 4px;
+  }
+}
+
+/* ── sm (768px) ── */
+@media (max-width: 768px) {
+  .mem-section {
+    padding: 72px 24px 76px;
+  }
+
+  .mem-header {
+    margin-bottom: 48px;
+  }
+
+  .mem-grid {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    gap: 28px;
+  }
+
+  .mem-card--highlight {
+    transform: none;
+    order: -1;
+  }
+
+  .mem-card--highlight:hover {
+    transform: translateY(-4px);
+  }
+
+  .mem-card {
+    padding: 40px 28px 36px;
+  }
+}
+
+/* ── xs (480px) ── */
+@media (max-width: 480px) {
+  .mem-section {
+    padding: 60px 16px 64px;
+  }
+
+  .mem-header__title {
+    font-size: 18px;
+    letter-spacing: 5px;
+  }
+
+  .mem-grid {
+    max-width: 100%;
+  }
+}

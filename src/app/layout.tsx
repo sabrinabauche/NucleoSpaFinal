@@ -10,6 +10,7 @@ import Providers from './components/Providers';
 import TopBar from './components/TopBar';
 import Header from './components/Header';
 import BackToTopBtn from './components/BackToTopBtn';
+import WhatsAppBtn from './components/WhatsAppBtn';
 import BookingModal from './components/BookingModal';
 import ScrollReveal from './components/ScrollReveal';
 
@@ -37,6 +38,7 @@ export default function RootLayout({
           <TopBar />
           <Header />
           {children}
+          <WhatsAppBtn />
           <BackToTopBtn />
           <BookingModal />
           <ScrollReveal />

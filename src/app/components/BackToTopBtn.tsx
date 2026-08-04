@@ -3,18 +3,12 @@ import React, {useEffect, useState} from 'react';
 import './backToTopBtn.css';
 
 export default function BackToTopBtn() {
-    const [scroll, setScroll] = useState(0);
+  const [scroll, setScroll] = useState(0);
   useEffect(() => {
-    window.addEventListener('scroll', () => {
-      setScroll(window.scrollY);
-    });
-  
-    return () => {
-      window.removeEventListener('scroll', () => {
-        setScroll(window.scrollY);
-      });
-    };
-  }, [scroll]);
+    const handleScroll = () => setScroll(window.scrollY);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const backToTop = () => {
     window.scrollTo(0,0);

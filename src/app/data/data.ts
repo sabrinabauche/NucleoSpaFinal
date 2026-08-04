@@ -13,6 +13,12 @@ export const navs = [
     active: false,
   },
   {
+    id: 5,
+    name: 'Membresías',
+    target: 'memberships',
+    active: false,
+  },
+  {
     id: 4,
     name: 'Contacto',
     target: 'contact',

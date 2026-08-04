@@ -21,7 +21,6 @@ export default function Hero() {
 
           <div className="btns">
             <HeroBtn name="Agendar tratamiento" target="tratamientos" />
-            <HeroBtn name="Diagnóstico gratis" target="contact" />
           </div>
 
         </div>

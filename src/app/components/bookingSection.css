@@ -12,6 +12,127 @@
   margin: 0 auto;
 }
 
+/* ── RIGHT COLUMN ── */
+.bs-right-col {
+  display: flex;
+  flex-direction: column;
+  padding-left: 48px;
+  flex-shrink: 0;
+  min-width: 280px;
+}
+
+/* ── TREATMENT DROPDOWN ── */
+.bs-dropdown {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.bs-dropdown-trigger {
+  width: 100%;
+  background: transparent;
+  border: 1px solid rgba(195, 178, 150, 0.3);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 13px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.bs-dropdown-trigger:hover,
+.bs-dropdown-trigger.open {
+  border-color: #c3b296;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.bs-dropdown-trigger.has-value {
+  color: #c3b296;
+  border-color: rgba(195, 178, 150, 0.5);
+}
+
+.bs-dropdown-trigger i {
+  font-size: 12px;
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+.bs-dropdown-list {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: #1a1410;
+  border: 1px solid rgba(195, 178, 150, 0.2);
+  border-radius: 6px;
+  overflow: hidden;
+  z-index: 50;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.bs-dropdown-item {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(195, 178, 150, 0.06);
+  color: rgba(255, 255, 255, 0.65);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  padding: 13px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.15s, color 0.15s;
+  text-align: left;
+}
+
+.bs-dropdown-item:last-of-type { border-bottom: none; }
+
+.bs-dropdown-item:hover {
+  background: rgba(195, 178, 150, 0.07);
+  color: #fff;
+}
+
+.bs-dropdown-item.selected {
+  color: #c3b296;
+  background: rgba(195, 178, 150, 0.06);
+}
+
+.bs-dropdown-item i { font-size: 15px; }
+
+.bs-dropdown-done {
+  width: 100%;
+  background: rgba(195, 178, 150, 0.08);
+  border: none;
+  border-top: 1px solid rgba(195, 178, 150, 0.15);
+  color: #c3b296;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.bs-dropdown-done:hover { background: rgba(195, 178, 150, 0.14); }
+
+.bs-dropdown-summary {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  color: rgba(195, 178, 150, 0.6);
+  letter-spacing: 1px;
+  margin: 8px 0 0;
+}
+
 /* ── HEADER ── */
 .bs-header {
   text-align: center;
@@ -36,12 +157,13 @@
   text-transform: uppercase;
 }
 
-/* ── BODY: calendar centered, time slots expand on date select ── */
+/* ── BODY: calendar + right column ── */
 .bs-body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
   margin-bottom: 36px;
+  gap: 0;
 }
 
 /* ── CALENDAR ── */
@@ -179,17 +301,36 @@
   border-radius: 6px;
   color: rgba(255, 255, 255, 0.75);
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 15px;
-  letter-spacing: 1px;
-  padding: 13px 8px;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  padding: 11px 8px;
   cursor: pointer;
   transition: all 0.2s;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.bs-time__start {
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.bs-time__end {
+  font-size: 10px;
+  opacity: 0.55;
+  letter-spacing: 0.5px;
 }
 
 .bs-time:hover {
   border-color: #c3b296;
   color: #ffffff;
+}
+
+.bs-time:hover .bs-time__end {
+  opacity: 0.8;
 }
 
 .bs-time.selected {
@@ -198,22 +339,98 @@
   color: #c3b296;
 }
 
-/* ── CONTACT FORM ── */
-.bs-form {
-  border-top: 1px solid rgba(195, 178, 150, 0.12);
-  padding-top: 32px;
+.bs-time.selected .bs-time__end {
+  opacity: 0.8;
 }
 
-.bs-form__selected {
+/* ── FORM VIEW (reemplaza al calendario) ── */
+.bs-form-view {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  animation: bs-fadein 0.3s ease;
+}
+
+@keyframes bs-fadein {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.bs-form-view__summary {
   display: flex;
-  gap: 10px;
   align-items: center;
-  margin-bottom: 24px;
+  gap: 10px;
   font-family: 'Josefin Sans', sans-serif;
   font-size: 12px;
   color: #c3b296;
   letter-spacing: 1px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+/* ── FORM ACTIONS: volver + WA + submit ── */
+.bs-form__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(195, 178, 150, 0.1);
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.bs-form__actions-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bs-back-btn {
+  background: transparent;
+  border: none;
+  color: rgba(195, 178, 150, 0.55);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 0;
+  transition: color 0.2s;
+  flex-shrink: 0;
+}
+.bs-back-btn:hover { color: #c3b296; }
+.bs-back-btn i { font-size: 16px; }
+
+.bs-whatsapp-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: transparent;
+  border: 1px solid rgba(37, 211, 102, 0.45);
+  border-radius: 4px;
+  color: rgba(37, 211, 102, 0.8);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 12px 18px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.25s, color 0.25s, background 0.25s;
+}
+.bs-whatsapp-btn i { font-size: 16px; }
+.bs-whatsapp-btn:hover {
+  border-color: #25d366;
+  color: #25d366;
+  background: rgba(37, 211, 102, 0.06);
+}
+
+/* ── CONTACT FORM ── */
+.bs-form {
 }
 
 .bs-form__fields {
@@ -261,6 +478,21 @@
   border-color: #c3b296;
 }
 
+/* ── ERROR ── */
+.bs-error {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 12px;
+  color: #e07070;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+/* ── FORM DURATION TAG ── */
+.bs-form__duration {
+  opacity: 0.6;
+  font-size: 11px;
+}
+
 /* ── SUBMIT ── */
 .bs-submit {
   background: transparent;
@@ -275,8 +507,11 @@
   padding: 13px 36px;
   cursor: pointer;
   transition: all 0.3s;
-  display: block;
-  margin-left: auto;
+}
+
+.bs-submit:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 
 .bs-submit:hover {
@@ -310,7 +545,7 @@
 .bs-success p {
   font-family: 'Josefin Sans', sans-serif;
   font-size: 13px;
-  color: #888;
+  color: #ffffff;
   line-height: 1.7;
   max-width: 300px;
   margin: 0 auto;
@@ -367,8 +602,21 @@
     grid-template-columns: 1fr;
   }
 
-  .bs-submit {
+  .bs-form__actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .bs-form__actions-right {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .bs-submit,
+  .bs-whatsapp-btn,
+  .bs-back-btn {
     width: 100%;
     text-align: center;
+    justify-content: center;
   }
 }

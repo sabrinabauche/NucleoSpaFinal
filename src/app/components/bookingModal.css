@@ -70,7 +70,24 @@
   color: #ffffff;
   text-transform: uppercase;
   letter-spacing: 3px;
-  margin-bottom: 24px;
+  margin-bottom: 8px;
+}
+
+.booking-subtitle {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  color: rgba(195, 178, 150, 0.5);
+  letter-spacing: 1.5px;
+  margin-bottom: 20px;
+}
+
+.booking-duration-note {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  color: #c3b296;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  margin-top: -20px;
 }
 
 /* ── TREATMENT PILLS ── */
@@ -100,6 +117,11 @@
   border-color: #c3b296;
   color: #c3b296;
   background: rgba(195, 178, 150, 0.07);
+}
+
+.treatment-check {
+  margin-left: 5px;
+  font-size: 10px;
 }
 
 /* ── CALENDAR ── */
@@ -210,16 +232,24 @@
   cursor: pointer;
   transition: all 0.2s;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
 }
+.time-slot__start { font-size: 13px; letter-spacing: 1px; }
+.time-slot__end   { font-size: 10px; opacity: 0.55; }
 .time-slot:hover {
   border-color: #c3b296;
   color: #ffffff;
 }
+.time-slot:hover .time-slot__end { opacity: 0.8; }
 .time-slot.selected {
   border-color: #c3b296;
   background: rgba(195, 178, 150, 0.1);
   color: #c3b296;
 }
+.time-slot.selected .time-slot__end { opacity: 0.8; }
 
 /* ── CONTACT FORM ── */
 .booking-form {
@@ -275,14 +305,57 @@
   line-height: 1.8;
 }
 
+/* ── ERROR ── */
+.booking-error {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 12px;
+  color: #e07070;
+  letter-spacing: 0.5px;
+  margin-top: 8px;
+}
+
 /* ── NAV ── */
 .booking-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 24px;
+  margin-top: 36px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(195, 178, 150, 0.1);
+  gap: 12px;
 }
-.booking-nav--end { justify-content: flex-end; }
+
+.booking-nav__right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ── WA BUTTON (modal) ── */
+.booking-wa-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: transparent;
+  border: 1px solid rgba(37, 211, 102, 0.4);
+  border-radius: 4px;
+  color: rgba(37, 211, 102, 0.8);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 13px 16px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.25s, color 0.25s, background 0.25s;
+  white-space: nowrap;
+}
+.booking-wa-btn i { font-size: 15px; }
+.booking-wa-btn:hover {
+  border-color: #25d366;
+  color: #25d366;
+  background: rgba(37, 211, 102, 0.06);
+}
 
 /* ── BUTTONS ── */
 .booking-btn {
@@ -291,13 +364,14 @@
   border-radius: 4px;
   color: #ffffff;
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 2px;
-  padding: 12px 24px;
+  padding: 14px 28px;
   cursor: pointer;
   transition: all 0.3s;
+  white-space: nowrap;
 }
 .booking-btn:hover:not(:disabled) {
   background: #c3b296;
@@ -312,11 +386,13 @@
   border: none;
   color: rgba(195, 178, 150, 0.5);
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 11px;
-  letter-spacing: 1px;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
   cursor: pointer;
-  padding: 12px 0;
+  padding: 14px 0;
   transition: color 0.2s;
+  white-space: nowrap;
 }
 .booking-btn-ghost:hover { color: #c3b296; }
 
@@ -341,7 +417,7 @@
   margin-bottom: 14px;
 }
 .booking-success p {
-  color: #888888;
+  color: #ffffff;
   font-size: 13px;
   line-height: 1.8;
   margin-bottom: 28px;
@@ -358,7 +434,8 @@
 @media (max-width: 480px) {
   .booking-modal { padding: 32px 16px; }
   .booking-row { grid-template-columns: 1fr; }
-  .booking-nav { flex-direction: column-reverse; gap: 10px; }
-  .booking-nav--end { flex-direction: column; }
-  .booking-btn { width: 100%; text-align: center; }
+  .booking-nav { flex-direction: column-reverse; align-items: stretch; gap: 10px; }
+  .booking-nav__right { flex-direction: column-reverse; align-items: stretch; }
+  .booking-btn,
+  .booking-wa-btn { width: 100%; text-align: center; justify-content: center; }
 }

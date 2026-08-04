@@ -8,17 +8,17 @@ import Nav from './Nav';
 import Logo from './Logo';
 
 export default function Header() {
-  const [scroll, setScroll] = useState(0);
+  const [isPastThreshold, setIsPastThreshold] = useState(false);
   const pathname = usePathname();
   const isInnerPage = pathname !== '/';
 
   useEffect(() => {
-    const handleScroll = () => setScroll(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => setIsPastThreshold(window.scrollY > 100);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrolled = isInnerPage || scroll > 100;
+  const scrolled = isInnerPage || isPastThreshold;
 
   return (
     <header
