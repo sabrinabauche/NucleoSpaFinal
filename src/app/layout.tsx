@@ -22,8 +22,11 @@ const josefin = Josefin_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Nucleo Spa",
+  title: "Núcleo Clinique",
   description: "Faciales de lujo en Ciudad de México",
+  icons: {
+    icon: '/icon.png',
+  },
 };
 
 export default function RootLayout({
