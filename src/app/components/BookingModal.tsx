@@ -51,6 +51,8 @@ function minToTime(min: number) {
   return `${String(Math.floor(min / 60)).padStart(2, '0')}:${String(min % 60).padStart(2, '0')}`;
 }
 
+type BusySlot = { start: string; end: string };
+
 export default function BookingModal() {
   const { isOpen, closeModal, selectedTreatment } = useBooking();
 
@@ -59,6 +61,8 @@ export default function BookingModal() {
   const [selectedSlugs, setSelectedSlugs] = useState<string[]>([]);
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
+  const [busySlots, setBusySlots] = useState<BusySlot[]>([]);
+  const [loadingSlots, setLoadingSlots] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -67,6 +71,7 @@ export default function BookingModal() {
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
+  const todayStr = toDateString(today.getFullYear(), today.getMonth(), today.getDate());
 
   useEffect(() => {
     if (selectedTreatment) {
@@ -86,16 +91,35 @@ export default function BookingModal() {
     return () => { document.body.style.overflow = ''; };
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!date) { setBusySlots([]); return; }
+    setLoadingSlots(true);
+    fetch(`/api/availability?date=${date}`)
+      .then(r => r.json())
+      .then(data => setBusySlots(data.busy ?? []))
+      .catch(() => setBusySlots([]))
+      .finally(() => setLoadingSlots(false));
+  }, [date]);
+
   if (!isOpen) return null;
 
   const totalDuration = selectedSlugs.length > 0
     ? selectedSlugs.reduce((s, slug) => s + (treatments.find(t => t.slug === slug)?.durationMinutes ?? 60), 0)
     : 60;
 
-  const availableSlots = TIME_SLOTS.filter(s => slotMin(s) + totalDuration <= CLOSING_MINUTES);
+  const availableSlots = TIME_SLOTS.filter(slot => {
+    const start = slotMin(slot);
+    const end   = start + totalDuration;
+    if (end > CLOSING_MINUTES) return false;
+    return !busySlots.some(b => {
+      const bStart = slotMin(b.start);
+      const bEnd   = slotMin(b.end);
+      return start < bEnd && end > bStart;
+    });
+  });
 
   const isPast = (day: number) =>
-    new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day) < today;
+    toDateString(currentMonth.getFullYear(), currentMonth.getMonth(), day) <= todayStr;
 
   const isSelectedDay = (day: number) =>
     date === toDateString(currentMonth.getFullYear(), currentMonth.getMonth(), day);
@@ -106,10 +130,9 @@ export default function BookingModal() {
     setTime('');
   };
 
-  const isPrevMonthDisabled = () => {
-    const prev = new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1);
-    return prev < new Date(today.getFullYear(), today.getMonth(), 1);
-  };
+  const isPrevMonthDisabled = () =>
+    toDateString(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1) <
+    toDateString(today.getFullYear(), today.getMonth(), 1);
 
   const toggleTreatment = (slug: string) => {
     setSelectedSlugs(prev => prev.includes(slug) ? prev.filter(s => s !== slug) : [...prev, slug]);
@@ -238,21 +261,28 @@ export default function BookingModal() {
             {date && (
               <div className="time-slots">
                 <p className="time-slots__label">Hora</p>
-                <div className="time-slots__grid">
-                  {availableSlots.map(t => (
-                    <button
-                      key={t}
-                      type="button"
-                      className={`time-slot ${time === t ? 'selected' : ''}`}
-                      onClick={() => setTime(t)}
-                    >
-                      <span className="time-slot__start">{t}</span>
-                      {selectedSlugs.length > 1 && (
-                        <span className="time-slot__end">– {minToTime(slotMin(t) + totalDuration)}</span>
-                      )}
-                    </button>
-                  ))}
-                </div>
+                {loadingSlots ? (
+                  <p className="time-slots__loading">Verificando disponibilidad...</p>
+                ) : (
+                  <div className="time-slots__grid">
+                    {availableSlots.length === 0 && (
+                      <p className="time-slots__empty">Sin horarios disponibles</p>
+                    )}
+                    {availableSlots.map(t => (
+                      <button
+                        key={t}
+                        type="button"
+                        className={`time-slot ${time === t ? 'selected' : ''}`}
+                        onClick={() => setTime(t)}
+                      >
+                        <span className="time-slot__start">{t}</span>
+                        {selectedSlugs.length > 1 && (
+                          <span className="time-slot__end">– {minToTime(slotMin(t) + totalDuration)}</span>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
 

@@ -275,6 +275,16 @@
   pointer-events: all;
 }
 
+.bs-times__loading,
+.bs-times__empty {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  color: rgba(196, 168, 122, 0.4);
+  letter-spacing: 1px;
+  padding-left: 48px;
+  margin: 0;
+}
+
 .bs-times__label {
   font-family: 'Josefin Sans', sans-serif;
   font-size: 11px;

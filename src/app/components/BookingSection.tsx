@@ -9,6 +9,8 @@ const MONTHS_ES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Ago
 const TIME_SLOTS = ['10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00'];
 const CLOSING_MINUTES = 19 * 60;
 
+type BusySlot = { start: string; end: string };
+
 function getCalendarDays(month: Date): (number | null)[] {
   const year = month.getFullYear();
   const m = month.getMonth();
@@ -43,18 +45,24 @@ export default function BookingSection({ treatmentLabel, treatmentSlug, showHead
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
+  // String YYYY-MM-DD de hoy — comparar strings ISO evita problemas de timezone
+  const todayStr = toDateString(today.getFullYear(), today.getMonth(), today.getDate());
+
   const isSingleMode = Boolean(treatmentSlug && treatmentSlug !== 'diagnostico');
 
-  const [view, setView]                         = useState<'calendar' | 'form'>('calendar');
-  const [selectedSlugs, setSelectedSlugs]       = useState<string[]>(isSingleMode && treatmentSlug ? [treatmentSlug] : []);
-  const [dropdownOpen, setDropdownOpen]         = useState(false);
-  const [currentMonth, setCurrentMonth]         = useState(new Date());
-  const [selectedDate, setSelectedDate]         = useState('');
-  const [selectedTime, setSelectedTime]         = useState('');
-  const [form, setForm]                         = useState({ name: '', email: '', phone: '' });
-  const [submitted, setSubmitted]               = useState(false);
-  const [loading, setLoading]                   = useState(false);
-  const [error, setError]                       = useState('');
+  const [view, setView]               = useState<'calendar' | 'form'>('calendar');
+  const [selectedSlugs, setSelectedSlugs] = useState<string[]>(isSingleMode && treatmentSlug ? [treatmentSlug] : []);
+  const [dropdownOpen, setDropdownOpen]   = useState(false);
+  const [currentMonth, setCurrentMonth]   = useState(new Date());
+  const [selectedDate, setSelectedDate]   = useState('');
+  const [selectedTime, setSelectedTime]   = useState('');
+  const [busySlots, setBusySlots]         = useState<BusySlot[]>([]);
+  const [loadingSlots, setLoadingSlots]   = useState(false);
+  const [availError, setAvailError]       = useState('');
+  const [form, setForm]                   = useState({ name: '', email: '', phone: '' });
+  const [submitted, setSubmitted]         = useState(false);
+  const [loading, setLoading]             = useState(false);
+  const [error, setError]                 = useState('');
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -67,15 +75,44 @@ export default function BookingSection({ treatmentLabel, treatmentSlug, showHead
     return () => document.removeEventListener('mousedown', handleOut);
   }, []);
 
+  // Consultar disponibilidad cuando cambia la fecha
+  useEffect(() => {
+    if (!selectedDate) { setBusySlots([]); setAvailError(''); return; }
+    setLoadingSlots(true);
+    setAvailError('');
+    fetch(`/api/availability?date=${selectedDate}`)
+      .then(r => r.json())
+      .then(data => {
+        setBusySlots(data.busy ?? []);
+        if (data.error) setAvailError(data.error);
+      })
+      .catch(e => setAvailError(String(e)))
+      .finally(() => setLoadingSlots(false));
+  }, [selectedDate]);
+
   const totalDuration = selectedSlugs.length > 0
     ? selectedSlugs.reduce((s, slug) => s + (treatments.find(t => t.slug === slug)?.durationMinutes ?? 60), 0)
     : 60;
 
-  const availableSlots = TIME_SLOTS.filter(s => slotMin(s) + totalDuration <= CLOSING_MINUTES);
+  const availableSlots = TIME_SLOTS.filter(slot => {
+    const start = slotMin(slot);
+    const end   = start + totalDuration;
+    if (end > CLOSING_MINUTES) return false;
+    // Excluir slots que se superponen con eventos existentes
+    return !busySlots.some(b => {
+      const bStart = slotMin(b.start);
+      const bEnd   = slotMin(b.end);
+      return start < bEnd && end > bStart;
+    });
+  });
 
-  const isPast       = (d: number) => new Date(currentMonth.getFullYear(), currentMonth.getMonth(), d) < today;
-  const isSelected   = (d: number) => selectedDate === toDateString(currentMonth.getFullYear(), currentMonth.getMonth(), d);
-  const prevDisabled = () => new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1) < new Date(today.getFullYear(), today.getMonth(), 1);
+  // Bloquear hoy y días anteriores — comparación de strings YYYY-MM-DD
+  const isPast = (d: number) =>
+    toDateString(currentMonth.getFullYear(), currentMonth.getMonth(), d) <= todayStr;
+  const isSelected = (d: number) => selectedDate === toDateString(currentMonth.getFullYear(), currentMonth.getMonth(), d);
+  const prevDisabled = () =>
+    toDateString(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1) <
+    toDateString(today.getFullYear(), today.getMonth(), 1);
 
   const selectDay = (d: number) => {
     if (isPast(d)) return;
@@ -84,14 +121,8 @@ export default function BookingSection({ treatmentLabel, treatmentSlug, showHead
     setView('calendar');
   };
 
-  const selectTime = (t: string) => {
-    setSelectedTime(t);
-    setView('form');
-  };
-
-  const goBack = () => {
-    setView('calendar');
-  };
+  const selectTime = (t: string) => { setSelectedTime(t); setView('form'); };
+  const goBack     = () => setView('calendar');
 
   const toggleTreatment = (slug: string) => {
     setSelectedSlugs(prev => prev.includes(slug) ? prev.filter(s => s !== slug) : [...prev, slug]);
@@ -109,6 +140,7 @@ export default function BookingSection({ treatmentLabel, treatmentSlug, showHead
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           treatments: selectedSlugs.map(s => treatments.find(t => t.slug === s)?.title ?? s),
+          treatmentSlugs: selectedSlugs,
           date: selectedDate, startTime: selectedTime, endTime,
           durationMinutes: totalDuration,
           name: form.name, email: form.email, phone: form.phone,
@@ -117,7 +149,7 @@ export default function BookingSection({ treatmentLabel, treatmentSlug, showHead
       if (!res.ok) throw new Error();
       setSubmitted(true);
     } catch { setError('Hubo un problema al agendar. Intenta de nuevo.'); }
-    finally   { setLoading(false); }
+    finally  { setLoading(false); }
   };
 
   if (submitted) return (
@@ -156,7 +188,6 @@ export default function BookingSection({ treatmentLabel, treatmentSlug, showHead
       {view === 'calendar' && (
         <div className="bs-body">
 
-          {/* Calendario */}
           <div className="bs-calendar">
             <div className="bs-cal-nav">
               <button onClick={() => setCurrentMonth(m => new Date(m.getFullYear(), m.getMonth() - 1, 1))} disabled={prevDisabled()}>‹</button>
@@ -174,7 +205,6 @@ export default function BookingSection({ treatmentLabel, treatmentSlug, showHead
             </div>
           </div>
 
-          {/* Columna derecha */}
           <div className="bs-right-col">
 
             {!isSingleMode && (
@@ -215,33 +245,39 @@ export default function BookingSection({ treatmentLabel, treatmentSlug, showHead
               </div>
             )}
 
-            {/* Horarios */}
             <div className={`bs-times ${selectedDate ? 'visible' : ''}`}>
               <p className="bs-times__label">{selectedDate ? formatDate(selectedDate) : ''}</p>
-              <div className="bs-times__grid">
-                {availableSlots.map(t => (
-                  <button key={t} type="button"
-                    className={`bs-time ${selectedTime === t ? 'selected' : ''}`}
-                    onClick={() => selectTime(t)}
-                  >
-                    <span className="bs-time__start">{t}</span>
-                    {selectedSlugs.length > 1 && (
-                      <span className="bs-time__end">– {minToTime(slotMin(t) + totalDuration)}</span>
-                    )}
-                  </button>
-                ))}
-              </div>
+              {availError && <p className="bs-times__empty" style={{color:'#e07070'}}>Error: {availError}</p>}
+              {loadingSlots ? (
+                <p className="bs-times__loading">Verificando disponibilidad...</p>
+              ) : (
+                <div className="bs-times__grid">
+                  {availableSlots.length === 0 && selectedDate && (
+                    <p className="bs-times__empty">Sin horarios disponibles</p>
+                  )}
+                  {availableSlots.map(t => (
+                    <button key={t} type="button"
+                      className={`bs-time ${selectedTime === t ? 'selected' : ''}`}
+                      onClick={() => selectTime(t)}
+                    >
+                      <span className="bs-time__start">{t}</span>
+                      {selectedSlugs.length > 1 && (
+                        <span className="bs-time__end">– {minToTime(slotMin(t) + totalDuration)}</span>
+                      )}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
           </div>
         </div>
       )}
 
-      {/* ── VISTA FORMULARIO (reemplaza calendario) ── */}
+      {/* ── VISTA FORMULARIO ── */}
       {view === 'form' && (
         <div className="bs-form-view">
 
-          {/* Resumen en la parte superior */}
           <div className="bs-form-view__summary">
             {selectedTreatmentLabel && <span>{selectedTreatmentLabel}</span>}
             {selectedTreatmentLabel && <span>·</span>}
@@ -250,7 +286,6 @@ export default function BookingSection({ treatmentLabel, treatmentSlug, showHead
             <span>{selectedTime}{selectedSlugs.length > 0 ? ` – ${endPreview}` : ''} hrs</span>
           </div>
 
-          {/* Formulario */}
           <form className="bs-form" onSubmit={handleSubmit}>
             <div className="bs-form__fields">
               <div className="bs-form__field bs-form__field--full">
@@ -263,29 +298,17 @@ export default function BookingSection({ treatmentLabel, treatmentSlug, showHead
               </div>
               <div className="bs-form__field">
                 <label>Teléfono</label>
-                <input type="tel" required value={form.phone} onChange={e => setForm(f=>({...f,phone:e.target.value}))} placeholder="+52 55 0000 0000" />
+                <input type="tel" required value={form.phone} onChange={e => setForm(f=>({...f,phone:e.target.value}))} placeholder="55 0000 0000" />
               </div>
             </div>
             {error && <p className="bs-error">{error}</p>}
-            {/* Acciones: volver + WhatsApp + solicitar */}
             <div className="bs-form__actions">
               <button type="button" className="bs-back-btn" onClick={goBack}>
                 <i className="bi bi-arrow-left" /> Volver
               </button>
-              <div className="bs-form__actions-right">
-                <a
-                  href="https://wa.me/525528425370?text=Hola%2C%20estoy%20interesada%20en%20agendar%20una%20cita%20en%20Nucleo%20Spa"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bs-whatsapp-btn"
-                >
-                  <i className="bi bi-whatsapp" />
-                  WhatsApp
-                </a>
-                <button type="submit" className="bs-submit" disabled={loading || selectedSlugs.length === 0}>
-                  {loading ? 'Agendando...' : 'Solicitar cita'}
-                </button>
-              </div>
+              <button type="submit" className="bs-submit" disabled={loading || selectedSlugs.length === 0}>
+                {loading ? 'Agendando...' : 'Solicitar cita'}
+              </button>
             </div>
           </form>
 

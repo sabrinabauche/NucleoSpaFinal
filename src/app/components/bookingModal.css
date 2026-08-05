@@ -220,6 +220,14 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
 }
+.time-slots__loading,
+.time-slots__empty {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  color: rgba(195, 178, 150, 0.45);
+  letter-spacing: 1px;
+  margin: 4px 0 0;
+}
 .time-slot {
   background: transparent;
   border: 1px solid rgba(195, 178, 150, 0.25);

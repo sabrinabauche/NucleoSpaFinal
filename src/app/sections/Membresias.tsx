@@ -39,9 +39,14 @@ export default function Membresias() {
               ))}
             </ul>
 
-            <button className="mem-card__cta">
+            <a
+              className="mem-card__cta"
+              href={`https://wa.me/525528425370?text=${encodeURIComponent(`Hola, me interesa la membresía ${m.name} de Núcleo Clinique`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Consultar
-            </button>
+            </a>
           </div>
         ))}
       </div>
