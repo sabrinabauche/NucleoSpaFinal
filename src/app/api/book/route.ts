@@ -53,6 +53,7 @@ export async function POST(req: NextRequest) {
     const auth     = getCalendarAuth();
     const calendar = google.calendar({ version: 'v3', auth });
     const calendarId = process.env.GOOGLE_CALENDAR_ID || 'primary';
+    console.log('[/api/book] Creando evento en calendario:', calendarId);
 
     const event = {
       summary:     `Núcleo Clinique · ${name}`,
@@ -74,7 +75,8 @@ export async function POST(req: NextRequest) {
       },
     };
 
-    await calendar.events.insert({ calendarId, requestBody: event, sendUpdates: 'none' });
+    const created = await calendar.events.insert({ calendarId, requestBody: event, sendUpdates: 'none' });
+    console.log('[/api/book] Evento creado:', created.data.id, created.data.htmlLink);
 
   } catch (err) {
     calendarError = err instanceof Error ? err.message : String(err);
@@ -99,12 +101,27 @@ export async function POST(req: NextRequest) {
 
       if (process.env.RESEND_NOTIFY_EMAIL) {
         await resend.emails.send({
-          from:    process.env.RESEND_FROM_EMAIL ?? 'Núcleo Clinique <onboarding@resend.dev>',
+          from:    process.env.RESEND_FROM_EMAIL ?? 'Núcleo Clinique <no-reply@nucleoclinique.com>',
           to:      process.env.RESEND_NOTIFY_EMAIL,
           subject: `Nueva cita: ${name} – ${dateFormatted} ${startTime}`,
           html:    buildSpaEmail({ name, email, phone, treatmentList, dateFormatted, startTime, endTime }),
         });
       }
+
+      // Invitación .ics a Roberta (compatible con Zoho Mail Calendar)
+      const icsContent = buildICS({ name, treatmentList, date, startTime, endTime, durationMinutes });
+      await resend.emails.send({
+        from:    process.env.RESEND_FROM_EMAIL ?? 'Núcleo Clinique <no-reply@nucleoclinique.com>',
+        to:      'roberta@nucleoclinique.com',
+        subject: `Nueva cita: ${name} – ${dateFormatted} ${startTime}`,
+        html:    buildSpaEmail({ name, email, phone, treatmentList, dateFormatted, startTime, endTime }),
+        attachments: [
+          {
+            filename: 'cita.ics',
+            content:  Buffer.from(icsContent).toString('base64'),
+          },
+        ],
+      });
 
     } catch (err) {
       console.error('[/api/book] Resend error:', err instanceof Error ? err.message : err);
@@ -243,6 +260,34 @@ function buildClientEmail({ name, treatmentList, dateFormatted, startTime, endTi
     </table>
   </body>
 </html>`;
+}
+
+function buildICS({ name, treatmentList, date, startTime, endTime }: {
+  name: string; treatmentList: string; date: string; startTime: string; endTime: string; durationMinutes: number;
+}) {
+  const uid = `${Date.now()}-${Math.random().toString(36).slice(2)}@nucleoclinique.com`;
+  const now = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+  const dtStart = `${date.replace(/-/g, '')}T${startTime.replace(':', '')}00`;
+  const dtEnd   = `${date.replace(/-/g, '')}T${endTime.replace(':', '')}00`;
+
+  return [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Nucleo Clinique//ES',
+    'CALSCALE:GREGORIAN',
+    'METHOD:REQUEST',
+    'BEGIN:VEVENT',
+    `UID:${uid}`,
+    `DTSTAMP:${now}`,
+    `DTSTART;TZID=America/Mexico_City:${dtStart}`,
+    `DTEND;TZID=America/Mexico_City:${dtEnd}`,
+    `SUMMARY:Núcleo Clinique · ${name}`,
+    `DESCRIPTION:Tratamiento: ${treatmentList}\\nCliente: ${name}`,
+    'ORGANIZER;CN=Núcleo Clinique:mailto:no-reply@nucleoclinique.com',
+    'ATTENDEE;CN=Roberta;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION:mailto:roberta@nucleoclinique.com',
+    'END:VEVENT',
+    'END:VCALENDAR',
+  ].join('\r\n');
 }
 
 function buildSpaEmail({ name, email, phone, treatmentList, dateFormatted, startTime, endTime }: {
