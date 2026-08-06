@@ -163,7 +163,7 @@ export default function BookingSection({ treatmentLabel, treatmentSlug, showHead
   const endPreview = selectedTime ? minToTime(slotMin(selectedTime) + totalDuration) : '';
 
   const triggerLabel = selectedSlugs.length === 0
-    ? 'Selecciona tratamiento'
+    ? 'Seleccionar'
     : selectedSlugs.length === 1
       ? (treatments.find(t => t.slug === selectedSlugs[0])?.title ?? '')
       : `${selectedSlugs.length} tratamientos`;
@@ -209,6 +209,7 @@ export default function BookingSection({ treatmentLabel, treatmentSlug, showHead
 
             {!isSingleMode && (
               <div className="bs-dropdown" ref={dropdownRef}>
+                <p className="bs-dropdown__question">¿Qué tratamiento deseas realizar?</p>
                 <button
                   className={`bs-dropdown-trigger ${selectedSlugs.length > 0 ? 'has-value' : ''} ${dropdownOpen ? 'open' : ''}`}
                   onClick={() => setDropdownOpen(v => !v)}

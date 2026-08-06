@@ -125,6 +125,15 @@
 
 .bs-dropdown-done:hover { background: rgba(195, 178, 150, 0.14); }
 
+.bs-dropdown__question {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  color: rgba(195, 178, 150, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+}
+
 .bs-dropdown-summary {
   font-family: 'Josefin Sans', sans-serif;
   font-size: 10px;
@@ -582,6 +591,17 @@
     align-items: center;
   }
 
+  .bs-right-col {
+    padding-left: 0;
+    width: 100%;
+    max-width: 480px;
+    align-items: center;
+  }
+
+  .bs-dropdown {
+    width: 100%;
+  }
+
   .bs-times {
     width: 100% !important;
     max-width: 480px;
@@ -596,8 +616,14 @@
     padding-left: 0;
   }
 
+  .bs-times__loading,
+  .bs-times__empty {
+    padding-left: 0;
+  }
+
   .bs-times__grid {
     min-width: unset;
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 

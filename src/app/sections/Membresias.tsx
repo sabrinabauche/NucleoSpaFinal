@@ -51,9 +51,6 @@ export default function Membresias() {
         ))}
       </div>
 
-      <p className="mem-footer">
-        Todas las membresías incluyen diagnóstico gratuito y son renovables mensualmente.
-      </p>
 
     </section>
   );
