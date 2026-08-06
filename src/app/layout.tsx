@@ -25,7 +25,9 @@ export const metadata: Metadata = {
   title: "Núcleo Clinique",
   description: "Faciales de lujo en Ciudad de México",
   icons: {
-    icon: '/icon.png',
+    icon: [{ url: '/icon.png', type: 'image/png' }],
+    shortcut: [{ url: '/icon.png', type: 'image/png' }],
+    apple: [{ url: '/icon.png', type: 'image/png' }],
   },
 };
 
