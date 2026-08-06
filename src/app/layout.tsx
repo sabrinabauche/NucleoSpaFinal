@@ -29,6 +29,9 @@ export const metadata: Metadata = {
     shortcut: [{ url: '/icon.png', type: 'image/png' }],
     apple: [{ url: '/icon.png', type: 'image/png' }],
   },
+  other: {
+    'theme-color': '#160802',
+  },
 };
 
 export default function RootLayout({

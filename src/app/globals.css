@@ -15,14 +15,16 @@
 html {
   scroll-behavior: smooth;
   min-height: 100%;
-  background: linear-gradient(
+  background-color: #3a1a08;
+  background-image: linear-gradient(
     to bottom,
     #160802 0%,
     #2a1408 20%,
     #4a2810 48%,
     #5e3418 72%,
     #6a3c20 100%
-  ) no-repeat;
+  );
+  background-repeat: no-repeat;
   background-size: 100% 100%;
 }
 

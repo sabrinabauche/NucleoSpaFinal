@@ -14,6 +14,10 @@ export async function GET(req: NextRequest) {
   const date = req.nextUrl.searchParams.get('date');
   if (!date) return NextResponse.json({ busy: [] });
 
+  if (!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || !process.env.GOOGLE_PRIVATE_KEY) {
+    return NextResponse.json({ busy: [] });
+  }
+
   try {
     const auth = new google.auth.GoogleAuth({
       credentials: {

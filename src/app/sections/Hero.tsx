@@ -14,6 +14,7 @@ export default function Hero() {
         className="container position-relative text-center"
         data-aos="zoom-in"
         data-aos-delay="100"
+        data-aos-once="true"
       >
           <div className="logo">
             <Logo className="hero-logo" />

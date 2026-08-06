@@ -69,7 +69,7 @@
 /* md */
 @media (max-width: 992px) {
   #hero {
-    height: 100dvh;
+    height: 80vh;
   }
 
   .hero-logo {
@@ -84,21 +84,25 @@
 /* sm */
 @media (max-width: 768px) {
   .hero-logo {
-    width: 260px;
+    width: 240px;
+  }
+
+  #hero .btns {
+    margin-top: 16px;
   }
 }
 
 /* xs */
 @media (max-width: 480px) {
   .hero-logo {
-    width: 220px;
+    width: 200px;
   }
 
   #hero .btns {
+    margin-top: 12px;
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    padding-top: 24px;
   }
 }
 

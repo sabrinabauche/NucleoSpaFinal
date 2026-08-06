@@ -25,17 +25,19 @@
 /* sm */
 @media (max-width: 768px) {
   #hero .btn-hero {
-    font-size: 11px;
-    padding: 11px 18px;
+    font-size: 9px;
+    padding: 9px 16px;
+    letter-spacing: 1.5px;
   }
 }
 
 /* xs */
 @media (max-width: 480px) {
   #hero .btn-hero {
-    font-size: 11px;
-    padding: 11px 24px;
-    width: 180px;
+    font-size: 9px;
+    padding: 9px 20px;
+    letter-spacing: 1.5px;
+    width: 160px;
     justify-content: center;
   }
 }
