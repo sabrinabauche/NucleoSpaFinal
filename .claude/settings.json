@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(git add src/app/globals.css src/app/layout.tsx src/app/sections/hero.css src/app/components/heroBtn.css src/app/sections/Hero.tsx src/app/api/availability/route.ts)",
+      "PowerShell(git commit -m \"fix: mobile white bg, hero spacing, btn size, aos once, availability credentials guard\")",
+      "PowerShell(git add src/app/icon.png src/app/favicon.ico public/icon.png)",
+      "PowerShell(git commit -m \"fix: update icon.png with correct logo\")"
+    ]
+  }
+}
